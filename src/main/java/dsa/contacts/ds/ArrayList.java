@@ -204,6 +204,18 @@ public class ArrayList<E> implements List<E> {
         return s;
     }
 
+    public ArrayList<Integer> indexOfAll(E obj) {
+        ArrayList<Integer> indices = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            if (arreglo[i].equals(obj)) {
+                indices.add(i);
+            }
+        }
+
+        return indices;
+    }
+
     private class ArrayListIterator implements Iterator<E> {
         private int i;
 
