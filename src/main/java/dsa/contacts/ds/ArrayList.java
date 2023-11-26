@@ -23,32 +23,46 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return n;
     }
 
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return n == 0;
     }
 
     @Override
     public boolean contains(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int i = 0;
+        while (i < n && !arreglo[i].equals(o)) {
+            i++;
+        }
+        return i < n;
     }
 
     @Override
     public Iterator<E> iterator() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new ArrayListIterator();
     }
 
     @Override
     public Object[] toArray() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Object[] arregloNuevo = new Object[n];
+        for (int i = 0; i < n; i++) {
+            arregloNuevo[i] = arreglo[i];
+        }
+        return arregloNuevo;
     }
 
     @Override
     public <T> T[] toArray(T[] a) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (a.length < n) {
+            a = (T[]) new Object[n];
+        }
+        for (int i = 0; i < n; i++) {
+            a[i] = (T) arreglo[i];
+        }
+        return a;
     }
 
     @Override
@@ -59,7 +73,13 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public boolean remove(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int i = 0;
+        while (i < n && !arreglo[i].equals(o)) {
+            i++;
+        }
+        if (i == n) return false;
+        remove(i);
+        return true;
     }
 
     @Override
@@ -182,5 +202,26 @@ public class ArrayList<E> implements List<E> {
             }
         }
         return s;
+    }
+
+    private class ArrayListIterator implements Iterator<E> {
+        private int i;
+
+        public ArrayListIterator() {
+            i = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return i < n;
+        }
+
+        @Override
+        public E next() {
+            E element = arreglo[i];
+            i++;
+            return element;
+        }
+
     }
 }
