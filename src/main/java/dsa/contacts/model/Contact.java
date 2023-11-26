@@ -1,6 +1,7 @@
 package dsa.contacts.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -77,6 +78,21 @@ public class Contact {
     
     public void setFavorite(){favorite = !favorite;}
     
-    public abstract HashMap<String, String> getFields();
+    public HashMap<String, Object> getFields() {
+        HashMap<String, Object> fields = new HashMap<>();
+        fields.put("name", name);
+        fields.put("phones", phones);
+        fields.put("profilePic", profilePic);
+        fields.put("addresses", addresses);
+        fields.put("emails", emails);
+        fields.put("socialMedias", socialMedias);
+        fields.put("pics", pics);
+        fields.put("dates", dates);
+        fields.put("relatedContacts", relatedContacts);
+        fields.put("joinedGroups", joinedGroups);
+        fields.put("tags", tags);
+        fields.put("favorite", favorite);
+        return fields;
+    };
 
 }
