@@ -12,6 +12,11 @@ public class User {
     private String pic;
     private LinkedList<Contact> contacts;
     private List<String> groups;
+    private Types phoneTypes;
+    private Types addressTypes;
+    private Types emailTypes;
+    private Types socialMediaTypes;
+    private Types dateTypes;
     
     public User(String userName, String password){
         this.userName = userName;
@@ -29,6 +34,16 @@ public class User {
     public LinkedList<Contact> getContacts(){return contacts;}
     
     public String getPic(){return pic;}
+    
+    public Types getPhoneTypes(){return phoneTypes;}
+    
+    public Types getAddressTypes(){return addressTypes;}
+    
+    public Types getEmailTypes(){return emailTypes;}
+    
+    public Types socialMediaTypes(){return socialMediaTypes;}
+    
+    public Types dateTypes(){return dateTypes;}
     
     public boolean isAdmin(){return true;}
     
