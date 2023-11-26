@@ -5,12 +5,14 @@ dsa\contacts\model\SocialMedia.class
 dsa\contacts\controllers\InicioSesionController.class
 module-info.class
 dsa\contacts\util\ViewDisplay.class
+dsa\contacts\model\exceptions\UserNotFoundException.class
 dsa\contacts\model\Person.class
 dsa\contacts\model\exceptions\EmailException.class
 dsa\contacts\model\User.class
 dsa\contacts\model\exceptions\ValidationException.class
 dsa\contacts\model\Contact.class
 dsa\contacts\model\MyDate.class
+dsa\contacts\model\exceptions\InvalidPasswordException.class
 dsa\contacts\model\Company.class
 dsa\contacts\App.class
 dsa\contacts\ds\ArrayList.class

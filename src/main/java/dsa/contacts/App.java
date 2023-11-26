@@ -2,6 +2,7 @@ package dsa.contacts;
 
 import dsa.contacts.util.Util;
 import dsa.contacts.model.User;
+import dsa.contacts.model.exceptions.ValidationException;
 import java.io.File;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 
 public class App extends Application {
@@ -38,6 +41,12 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
+    
+    public static void showAlert(AlertType type, ValidationException e){
+        Alert alert = new Alert(type);
+        alert.setContentText(e.getMessage());
+        alert.showAndWait();
+    }
     private void loadSer() throws IOException, ClassNotFoundException{
         String ruta = PATH+"serializables/users.ser";
         File serFile = new File(ruta);
@@ -48,6 +57,11 @@ public class App extends Application {
             users = new ArrayList<User>();
             Util.createSer(ruta, users);
         }
+    }
+    
+    public static void save() throws IOException{
+        String ruta = PATH+"serializables/users.ser";
+        Util.createSer(ruta, users);
     }
 
 }

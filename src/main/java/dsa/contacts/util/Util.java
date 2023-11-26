@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import javafx.scene.Node;
 
 
 public class Util {
@@ -20,5 +21,13 @@ public class Util {
         FileInputStream fileInputStream = new FileInputStream(ruta);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
         return objectInputStream.readObject();
+    }
+    
+    public static void alertStyle(Node node){
+        node.setStyle("-fx-control-inner-background: red;-fx-text-fill: white");
+    }
+    
+    public static void removeAlerstStyle(Node node){
+        node.setStyle("-fx-control-inner-background: white;-fx-text-fill: black");
     }
 }

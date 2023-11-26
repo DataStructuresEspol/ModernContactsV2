@@ -38,8 +38,10 @@ public class User {
     
     public void setPic(String pic){this.pic = pic;}
     
-    public boolean equals(String u){
-        return userName.equals(u);
+    @Override
+    public boolean equals(Object o){
+        User u = (User)o;
+        return userName.equals(u.getUserName().trim());
     }
     
     public void addGroup(String group){groups.add(group.toUpperCase());}

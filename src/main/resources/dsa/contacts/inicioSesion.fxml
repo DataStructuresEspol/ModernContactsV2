@@ -48,7 +48,7 @@
             </HBox>
             <HBox prefHeight="34.0" prefWidth="395.0">
                <children>
-                  <TextField prefHeight="26.0" prefWidth="323.0" promptText="juan@example.com">
+                  <TextField fx:id="userNameField" prefHeight="26.0" prefWidth="323.0" promptText="juan@example.com">
                      <HBox.margin>
                         <Insets left="15.0" />
                      </HBox.margin>
@@ -72,7 +72,7 @@
             </HBox>
             <HBox prefHeight="34.0" prefWidth="395.0">
                <children>
-                  <PasswordField prefHeight="26.0" prefWidth="254.0" promptText="Contraseña">
+                  <PasswordField fx:id="passwordField" prefHeight="26.0" prefWidth="254.0" promptText="Contraseña">
                      <HBox.margin>
                         <Insets left="15.0" />
                      </HBox.margin>
@@ -126,8 +126,8 @@
                   <Insets top="100.0" />
                </VBox.margin>
                <children>
-                  <Button mnemonicParsing="false" text="Registrarse" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                  <Button mnemonicParsing="false" text="Entrar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onMouseClicked="#SignIn" text="Registrarse" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onMouseClicked="#SignUp" text="Entrar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children>
