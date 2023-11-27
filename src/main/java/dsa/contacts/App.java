@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Stack;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
@@ -20,16 +21,20 @@ public class App extends Application {
     public static String PATH = "src/main/resources/dsa/contacts/";
     public static ArrayList<User> users;
     private static Scene scene;
+    public static Stack<String> recorrido = new Stack();
 
     @Override
     public void start(Stage stage) throws IOException, ClassNotFoundException {
         loadSer();
-        scene = new Scene(loadFXML("home"), 720, 1280);
+        String fxml = "login";
+        recorrido.push(fxml);
+        scene = new Scene(loadFXML(fxml), 720, 1280);
         stage.setScene(scene);
         stage.show();
     }
 
     public static void setRoot(String fxml) throws IOException {
+        recorrido.push(fxml);
         scene.setRoot(loadFXML(fxml));
     }
 
@@ -62,6 +67,11 @@ public class App extends Application {
     public static void save() throws IOException{
         String ruta = PATH+"serializables/users.ser";
         Util.createSer(ruta, users);
+    }
+    
+    public static void retroceder() throws IOException{
+        recorrido.pop();
+        App.setRoot(recorrido.peek());
     }
 
 }

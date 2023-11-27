@@ -2,8 +2,9 @@
 package dsa.contacts.model;
 
 import dsa.contacts.model.exceptions.EmailException;
+import java.io.Serializable;
 
-public class Email {
+public class Email implements Serializable{
     private String email;
     private String emailType;
     

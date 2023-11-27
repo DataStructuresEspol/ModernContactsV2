@@ -8,6 +8,7 @@ import dsa.contacts.model.exceptions.UserNotFoundException;
 import dsa.contacts.model.exceptions.ValidationException;
 import dsa.contacts.util.Logger;
 import dsa.contacts.util.Util;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -19,11 +20,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 
-/**
- * FXML Controller class
- *
- * @author ariel
- */
 public class LoginController implements Initializable {
 
     @FXML
@@ -38,13 +34,15 @@ public class LoginController implements Initializable {
     }    
 
     @FXML
-    private void SignIn(MouseEvent event) {
+    private void SignIn(MouseEvent event) throws IOException {
+        App.setRoot("register");
     }
 
     @FXML
-    private void SignUp(MouseEvent event) {
+    private void SignUp(MouseEvent event) throws IOException {
         try {
             Logger.logIn(userNameField.getText(), passwordField.getText());
+            App.setRoot("home");
         } catch (ValidationException ex) {
             showAlert(ex);
         }

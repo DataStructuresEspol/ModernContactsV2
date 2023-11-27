@@ -3,6 +3,7 @@ package dsa.contacts.util;
 
 import dsa.contacts.App;
 import dsa.contacts.model.User;
+import dsa.contacts.model.exceptions.AdreadyCreatedUser;
 import dsa.contacts.model.exceptions.InvalidPasswordException;
 import dsa.contacts.model.exceptions.UserNotFoundException;
 import dsa.contacts.model.exceptions.ValidationException;
@@ -31,7 +32,11 @@ public class Logger {
         else{throw new InvalidPasswordException("CONTRASEÑA INCORRECTA");}
     }
     
-    public static void registUser(String userName, String password) throws IOException{
+    public static void registUser(String userName, String password) throws IOException, UserNotFoundException, ValidationException{
+        if (userName.isBlank()){throw new UserNotFoundException("NO HAS LLENADO LA CASILLA");}
+        if (password.isBlank()){throw new InvalidPasswordException("NO HAS LLENADO LA CASILLA");}
+        if (password.length()<8){throw new InvalidPasswordException("LA CONTRASEÑA DEBE TENER AL MENOS 8 DÍGITOS");}
+        if (App.users.contains(new User(userName, password))){throw new AdreadyCreatedUser();}
         App.users.add(new User(userName, password));
         App.save();
     }

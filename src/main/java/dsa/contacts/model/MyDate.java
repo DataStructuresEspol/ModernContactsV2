@@ -1,8 +1,9 @@
 
 package dsa.contacts.model;
 import dsa.contacts.model.exceptions.DateException;
+import java.io.Serializable;
 
-public class MyDate {
+public class MyDate implements Serializable{
     private int year;
     private int month;
     private int day;

@@ -1,11 +1,12 @@
 package dsa.contacts.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Contact {
+public class Contact implements Serializable{
     private String name;
     private List<Phone> phones;
     private String profilePic;

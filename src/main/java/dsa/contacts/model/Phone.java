@@ -2,9 +2,10 @@
 package dsa.contacts.model;
 
 import dsa.contacts.model.exceptions.PhoneException;
+import java.io.Serializable;
 
 
-public class Phone {
+public class Phone implements Serializable{
     private String num;
     private String phoneType;
     private String countryCode;

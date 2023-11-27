@@ -1,8 +1,10 @@
 
 package dsa.contacts.model;
 
+import java.io.Serializable;
 
-public class SocialMedia {
+
+public class SocialMedia implements Serializable{
     private String user;
     private String socialMedia;
     

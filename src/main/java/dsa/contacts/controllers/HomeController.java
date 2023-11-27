@@ -1,5 +1,7 @@
 package dsa.contacts.controllers;
 
+import dsa.contacts.App;
+import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -7,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 import java.util.HashSet;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 public class HomeController {
     private HashSet<String> groups;
@@ -36,7 +40,10 @@ public class HomeController {
 
     @FXML
     ChoiceBox<String> countryOrder;
-
+    @FXML
+    private ImageView addGroupIcon;
+    @FXML
+    private ImageView addTagIcon;
     @FXML
     private void initialize() {
         groups = new HashSet<>();
@@ -123,5 +130,15 @@ public class HomeController {
         }
 
         return chosenTypes;
+    }
+
+    @FXML
+    private void regresar(MouseEvent event) throws IOException {
+        App.retroceder();
+    }
+
+    @FXML
+    private void addContact(MouseEvent event) throws IOException {
+        App.setRoot("addContact");
     }
 }

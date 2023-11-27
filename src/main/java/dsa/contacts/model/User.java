@@ -1,12 +1,13 @@
 
 package dsa.contacts.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 
-public class User {
+public class User implements Serializable{
     private String userName;
     private String password;
     private String pic;
@@ -23,6 +24,10 @@ public class User {
         this.password = password;
         contacts = new LinkedList<Contact>();
         groups = new ArrayList<String>();
+        phoneTypes = new Types();
+        emailTypes = new Types();
+        socialMediaTypes = new Types();
+        dateTypes = new Types();
     }
     
     public String getUserName(){return userName;}
