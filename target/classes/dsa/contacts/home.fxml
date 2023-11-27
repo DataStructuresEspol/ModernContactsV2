@@ -212,6 +212,9 @@
                </image>
             </ImageView>
          </children>
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
       </GridPane>
       <Label text="Hola, User!">
          <font>
