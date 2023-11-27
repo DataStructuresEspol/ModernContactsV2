@@ -1,6 +1,7 @@
 package dsa.contacts.ds;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -214,6 +215,27 @@ public class ArrayList<E> implements List<E> {
         }
 
         return indices;
+    }
+
+    public ArrayList<E> findAll(E obj, List<Comparator> comparators) {
+        ArrayList<E> elements = new ArrayList<>();
+
+        for (E element: arreglo) {
+            if (element != null) {
+                boolean found = true;
+                for (Comparator comparator: comparators) {
+                    if (comparator.compare(element, obj) != 0) {
+                        found = false;
+                        break;
+                    }
+                }
+                if (found) {
+                    elements.add(element);
+                }
+            }
+        }
+
+        return elements;
     }
 
     private class ArrayListIterator implements Iterator<E> {
