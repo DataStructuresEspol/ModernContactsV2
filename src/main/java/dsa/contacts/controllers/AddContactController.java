@@ -2,13 +2,22 @@
 package dsa.contacts.controllers;
 
 import dsa.contacts.App;
+import dsa.contacts.model.Address;
 import dsa.contacts.model.Contact;
+import dsa.contacts.model.Email;
+import dsa.contacts.model.Info;
+import dsa.contacts.model.Phone;
+import dsa.contacts.model.SocialMedia;
 import dsa.contacts.model.Types;
 import dsa.contacts.model.User;
+import dsa.contacts.model.exceptions.EmailException;
+import dsa.contacts.model.exceptions.PhoneException;
 import dsa.contacts.util.Logger;
 import dsa.contacts.util.Util;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +34,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
@@ -53,15 +63,30 @@ public class AddContactController {
     @FXML
     private TextField emailField;
     @FXML
+    private ComboBox<String> addressTypeBox;
+    @FXML
+    private TextField addressField;
+    @FXML
+    private ComboBox<String> socialMediaTypeBox;
+    @FXML
+    private TextField socialMediaField;
+    @FXML
+    private ImageView profilePic;
+    @FXML
+    private TextField nameField;
+    @FXML
     public void initialize(){
         user = Logger.loggedUser;
         checkView.setVisible(false);
-        newContact = new Contact();
+        newContact = ChoiceController.preContact;
+        
         infoOtro = new TextField();
         entryGroup = new TextField();
         entryGroup.setStyle("-fx-border-width: 1");
-        initBox(phoneTypeBox, user.getPhoneTypes());
-        initBox(emailTypeBox, user.getEmailTypes());
+        initBox(phoneTypeBox, user.getPhoneTypes(), newContact.getPhones(), phoneField);
+        initBox(emailTypeBox, user.getEmailTypes(), newContact.getEmails(), emailField);
+        initBox(addressTypeBox, user.getAddressTypes(), newContact.getAddresses(), addressField);
+        initBox(socialMediaTypeBox, user.getSocialMediaTypes(), newContact.getSocialMedias(), socialMediaField);
         
     }
 
@@ -82,18 +107,27 @@ public class AddContactController {
         }  
     }
     
-    private void initBox(ComboBox<String> box, Types items){
+    private void initBox(ComboBox<String> box, Types items,List<? extends Info> info, TextField field){
         ObservableList<String> opcionesObservable = FXCollections.observableArrayList(items.getTypes());
         opcionesObservable.add("otro");
         box.setItems(opcionesObservable);
-        box.setOnAction(eh -> boxAction(box, items));
+        box.setOnAction(eh -> boxAction(box, items, info, field));
     }
     
-    private void boxAction(ComboBox<String> box, Types items){
-        if (box.getSelectionModel().getSelectedItem().equals("otro")){
+    private void boxAction(ComboBox<String> box, Types items, List<? extends Info> info, TextField field){
+        if ("otro".equalsIgnoreCase(box.getSelectionModel().getSelectedItem())){
             abrirNuevaVentana(box,items);
         }
-    }
+        else{
+            boolean value = true;
+            for(Info i: info){
+                if(i.getType().equalsIgnoreCase(box.getSelectionModel().getSelectedItem())){
+                    field.setText(i.getInfo());
+                    value = false;
+                }
+        }
+            if (value){field.setText("");}
+    }}
 
     @FXML
     private void addGroup(MouseEvent event) throws FileNotFoundException {
@@ -163,4 +197,115 @@ public class AddContactController {
         // Mostrar la nueva ventana
         nuevaVentana.show();
     }
+    
+    
+    @FXML
+    private void addPhone() throws PhoneException{
+        //Agregar validaciones
+        String countryCode = "+593";
+        newContact.getPhones().add(new Phone(phoneField.getText(),
+                phoneTypeBox.getSelectionModel().getSelectedItem(),countryCode));
+        phoneTypeBox.setValue("");
+        phoneField.setText("");
+    }
+
+    @FXML
+    private void deletePhone(MouseEvent event) throws PhoneException {
+        //Agregar validaciones
+        String countryCode = "+593";
+        newContact.getPhones().remove(new Phone(phoneField.getText(),
+                phoneTypeBox.getSelectionModel().getSelectedItem(),countryCode));
+        phoneTypeBox.setValue("");
+        phoneField.setText("");
+    }
+
+    @FXML
+    private void addEmail(MouseEvent event) throws EmailException {
+         //Agregar validaciones
+        newContact.getEmails().add(new Email(emailField.getText(),
+                emailTypeBox.getSelectionModel().getSelectedItem()));
+        emailTypeBox.setValue("");
+        emailField.setText("");
+    }
+
+    @FXML
+    private void deleteEmail(MouseEvent event) throws EmailException {
+        //Agregar validaciones
+        newContact.getPhones().remove(new Email(emailField.getText(),
+                emailTypeBox.getSelectionModel().getSelectedItem()));
+        emailTypeBox.setValue("");
+        emailField.setText("");
+    }
+
+    @FXML
+    private void addAddress(MouseEvent event) {
+         //Agregar validaciones
+        newContact.getAddresses().add(new Address(addressField.getText(),
+                addressTypeBox.getSelectionModel().getSelectedItem()));
+        addressTypeBox.setValue("");
+        addressField.setText("");
+    }
+
+    @FXML
+    private void deleteAddress(MouseEvent event) {
+        //Agregar validaciones
+        newContact.getAddresses().remove(new Address(addressField.getText(),
+                addressTypeBox.getSelectionModel().getSelectedItem()));
+        addressTypeBox.setValue("");
+        addressField.setText("");
+    }
+
+    @FXML
+    private void addSocialMedia(MouseEvent event) {
+        //Agregar validaciones
+        newContact.getSocialMedias().add(new SocialMedia(socialMediaField.getText(),
+                socialMediaTypeBox.getSelectionModel().getSelectedItem()));
+        socialMediaTypeBox.setValue("");
+        socialMediaField.setText("");
+    }
+
+    @FXML
+    private void deleteSocialMedia(MouseEvent event) {
+        //Agregar validaciones
+        newContact.getSocialMedias().remove(new SocialMedia(socialMediaField.getText(),
+                socialMediaTypeBox.getSelectionModel().getSelectedItem()));
+        socialMediaTypeBox.setValue("");
+        socialMediaField.setText("");
+    }
+
+    @FXML
+    private void selectPic(MouseEvent event) throws FileNotFoundException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccione una imagen");
+
+        // Configurar el filtro para mostrar solo archivos de imagen (por ejemplo, PNG, JPG)
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.jpeg");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Mostrar el cuadro de diálogo de selección de archivo
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            String rutaArchivo = selectedFile.getAbsolutePath();
+            String nombreCompleto = selectedFile.getName();
+            int indexPunto = nombreCompleto.lastIndexOf('.');
+            String nombre = nombreCompleto.substring(0, indexPunto);
+            String rutaFinal = App.IMAGEPATH+nombre+"_copy.png";
+            try {
+            Util.copiarImagen(rutaArchivo, rutaFinal);
+            profilePic.setImage(Util.loadImage(rutaFinal));
+            System.out.println("Imagen copiada con éxito."+rutaFinal);
+        } catch (IOException e) {
+            System.out.println("Error al copiar la imagen: " + e.getMessage());
+            profilePic.setImage(Util.loadImage(rutaFinal));
+        }
+
+        } else {
+            System.out.println("Selección de foto cancelada por el usuario");
+        }
+    }
+    
+
+    
+    
 }

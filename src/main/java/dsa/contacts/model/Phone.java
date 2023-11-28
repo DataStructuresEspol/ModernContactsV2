@@ -3,9 +3,10 @@ package dsa.contacts.model;
 
 import dsa.contacts.model.exceptions.PhoneException;
 import java.io.Serializable;
+import java.util.List;
 
 
-public class Phone implements Serializable{
+public class Phone implements Serializable, Info{
     private String num;
     private String phoneType;
     private String countryCode;
@@ -34,4 +35,21 @@ public class Phone implements Serializable{
     
     public void setCountryCode(String countryCode){this.countryCode = countryCode;}
     
+    @Override
+    public boolean equals(Object o){
+        Phone p = (Phone)o;
+        return num.equals(p.getNum());
+    }
+
+    @Override
+    public String getType() {
+        return this.getPhoneType();
+    }
+
+    @Override
+    public String getInfo() {
+        return this.getNum();
+    }
+
+
 }

@@ -7,6 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 
@@ -36,5 +39,13 @@ public class Util {
     
     public static void removeAlerstStyle(Node node){
         node.setStyle("-fx-control-inner-background: white;-fx-text-fill: black");
+    }
+    
+    public static void copiarImagen(String rutaOrigen, String rutaDestino) throws IOException {
+        Path origenPath = Paths.get(rutaOrigen);
+        Path destinoPath = Paths.get(rutaDestino);
+
+        // Copiar el archivo desde la ruta de origen a la ruta de destino
+        Files.copy(origenPath, destinoPath);
     }
 }

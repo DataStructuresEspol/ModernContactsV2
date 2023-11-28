@@ -35,6 +35,7 @@ public class RegisterController implements Initializable {
     private void regist(MouseEvent event) throws IOException {
         try {
             Logger.registUser(userNameField.getText(), passwordField.getText());
+            regresar();
         } catch (ValidationException ex) {
             showAlert(ex);
         }
@@ -51,7 +52,7 @@ public class RegisterController implements Initializable {
     }
 
     @FXML
-    private void regresar(MouseEvent event) throws IOException {
+    private void regresar() throws IOException {
         App.retroceder();
     }
     

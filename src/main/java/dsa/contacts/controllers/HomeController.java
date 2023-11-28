@@ -139,6 +139,6 @@ public class HomeController {
 
     @FXML
     private void addContact(MouseEvent event) throws IOException {
-        App.setRoot("addContact");
+        App.setRoot("choice");
     }
 }

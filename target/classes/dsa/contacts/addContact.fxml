@@ -61,14 +61,20 @@
             <Insets top="20.0" />
          </VBox.margin>
       </GridPane>
-      <Label text="Nombre del contacto">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-         <VBox.margin>
-            <Insets top="20.0" />
-         </VBox.margin>
-      </Label>
+      <HBox alignment="TOP_CENTER" prefHeight="36.0" prefWidth="1280.0" spacing="10.0">
+         <children>
+            <Label text="Nombre:">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField prefHeight="25.0" prefWidth="143.0" promptText="Nombre del contacto">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </TextField>
+         </children>
+      </HBox>
       <GridPane>
         <columnConstraints>
           <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
@@ -79,7 +85,7 @@
           <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+            <ImageView fx:id="profilePic" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#selectPic" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
                   <Image url="@assets/images/google.png" />
                </image>
@@ -112,7 +118,7 @@
                         </Label>
                         <HBox alignment="TOP_CENTER" prefHeight="31.0" prefWidth="335.0">
                            <children>
-                              <HBox fx:id="groupBox" prefHeight="31.0" prefWidth="382.0" />
+                              <HBox fx:id="groupBox" alignment="TOP_CENTER" prefHeight="31.0" prefWidth="382.0" />
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <ImageView fitHeight="31.0" fitWidth="40.0" onMouseClicked="#addGroup" pickOnBounds="true" preserveRatio="true">
@@ -140,23 +146,38 @@
                   </VBox>
                   <VBox alignment="TOP_CENTER" spacing="5.0">
                      <children>
-                        <Label text="Telefonos">
+                        <Label text="Teléfono">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <GridPane prefWidth="165.0">
+                        <GridPane alignment="TOP_CENTER" prefHeight="30.0" prefWidth="249.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
+                            <RowConstraints />
                             <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="19.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <ComboBox fx:id="phoneTypeBox" prefHeight="25.0" prefWidth="78.0" />
-                              <TextField fx:id="phoneField" prefHeight="25.0" prefWidth="102.0" GridPane.columnIndex="1" />
+                              <ComboBox fx:id="phoneTypeBox" prefHeight="25.0" prefWidth="78.0" GridPane.rowIndex="1" />
+                              <TextField fx:id="phoneField" prefHeight="25.0" prefWidth="102.0" promptText="Teléfono" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <children>
+                                    <ImageView fitHeight="31.0" fitWidth="40.0" onMouseClicked="#addPhone" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@assets/images/check.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="31.0" fitWidth="51.0" onMouseClicked="#deletePhone" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@assets/images/minus.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
                            </children>
                         </GridPane>
                      </children>
@@ -168,18 +189,33 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <GridPane prefWidth="165.0">
+                        <GridPane alignment="TOP_CENTER" prefHeight="30.0" prefWidth="249.0">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
+                              <RowConstraints />
                               <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="19.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <ComboBox fx:id="emailTypeBox" prefHeight="25.0" prefWidth="78.0" />
-                              <TextField fx:id="emailField" prefHeight="25.0" prefWidth="102.0" GridPane.columnIndex="1" />
+                              <ComboBox fx:id="emailTypeBox" prefHeight="25.0" prefWidth="78.0" GridPane.rowIndex="1" />
+                              <TextField fx:id="emailField" prefHeight="25.0" prefWidth="102.0" promptText="Email" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <children>
+                                    <ImageView fitHeight="31.0" fitWidth="40.0" onMouseClicked="#addEmail" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@assets/images/check.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="31.0" fitWidth="51.0" onMouseClicked="#deleteEmail" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@assets/images/minus.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
                            </children>
                         </GridPane>
                      </children>
@@ -191,20 +227,33 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <GridPane>
+                        <GridPane alignment="TOP_CENTER" prefHeight="30.0" prefWidth="249.0">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints />
+                              <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label text="Trabajo" />
-                              <Label text="Hogar" GridPane.rowIndex="1" />
-                              <Label text="Espol" GridPane.columnIndex="1" />
-                              <Label text="Ceibos" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <ComboBox fx:id="addressTypeBox" prefHeight="25.0" prefWidth="78.0" GridPane.rowIndex="1" />
+                              <TextField fx:id="addressField" prefHeight="25.0" prefWidth="102.0" promptText="Dirección" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <children>
+                                    <ImageView fitHeight="31.0" fitWidth="40.0" onMouseClicked="#addAddress" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@assets/images/check.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="31.0" fitWidth="51.0" onMouseClicked="#deleteAddress" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@assets/images/minus.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
                            </children>
                         </GridPane>
                      </children>
@@ -216,28 +265,33 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <GridPane>
+                        <GridPane alignment="TOP_CENTER" prefHeight="30.0" prefWidth="249.0">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints />
+                              <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label text="A" GridPane.columnIndex="1" />
-                              <Label text="B" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@assets/icon/facebook.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
-                                 <image>
-                                    <Image url="@assets/icon/instagram.png" />
-                                 </image>
-                              </ImageView>
+                              <ComboBox fx:id="socialMediaTypeBox" prefHeight="25.0" prefWidth="78.0" GridPane.rowIndex="1" />
+                              <TextField fx:id="socialMediaField" prefHeight="25.0" prefWidth="102.0" promptText="User" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <children>
+                                    <ImageView fitHeight="31.0" fitWidth="40.0" onMouseClicked="#addSocialMedia" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@assets/images/check.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="31.0" fitWidth="51.0" onMouseClicked="#deleteSocialMedia" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@assets/images/minus.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
                            </children>
                         </GridPane>
                      </children>

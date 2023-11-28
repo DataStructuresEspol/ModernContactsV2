@@ -4,7 +4,7 @@ package dsa.contacts.model;
 import java.io.Serializable;
 
 
-public class Address implements Serializable{
+public class Address implements Serializable, Info{
     private String description;
     private String addressType;
     private String link;
@@ -30,4 +30,20 @@ public class Address implements Serializable{
     public void setAddressType(String addressType){this.addressType = addressType;}
     
     public void setLink(String link){this.link = link;}
+    
+    @Override
+    public boolean equals(Object o){
+        Address a = (Address)o;
+        return description.equals(a.getDescription()) && addressType.equalsIgnoreCase(a.getAddressType());
+    }
+
+    @Override
+    public String getType() {
+        return getAddressType();
+    }
+
+    @Override
+    public String getInfo() {
+        return getDescription();
+    }
 }

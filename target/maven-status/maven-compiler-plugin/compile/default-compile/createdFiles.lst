@@ -18,6 +18,7 @@ dsa\contacts\controllers\HomeController.class
 dsa\contacts\model\SocialMedia.class
 dsa\contacts\controllers\RegisterController.class
 module-info.class
+dsa\contacts\controllers\ChoiceController.class
 dsa\contacts\util\ViewDisplay.class
 dsa\contacts\controllers\ContactInfoController.class
 dsa\contacts\ds\DoublyCircular$ReverseIterator.class
@@ -26,6 +27,7 @@ dsa\contacts\model\exceptions\ValidationException.class
 dsa\contacts\ds\DoublyCircular$Node.class
 dsa\contacts\model\MyDate.class
 dsa\contacts\model\Company.class
+dsa\contacts\model\Info.class
 dsa\contacts\ds\ArrayList.class
 dsa\contacts\model\exceptions\DateException.class
 dsa\contacts\ds\ArrayList$ArrayListIterator.class

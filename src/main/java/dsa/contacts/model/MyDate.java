@@ -3,7 +3,7 @@ package dsa.contacts.model;
 import dsa.contacts.model.exceptions.DateException;
 import java.io.Serializable;
 
-public class MyDate implements Serializable{
+public class MyDate implements Serializable, Info{
     private int year;
     private int month;
     private int day;
@@ -51,5 +51,21 @@ public class MyDate implements Serializable{
     }
     
     public void setDateType(String dateType){this.dateType = dateType;}
+    
+    @Override
+    public boolean equals(Object o){
+        MyDate d = (MyDate)o;
+        return year == d.getYear() && month == d.getMonth() && day == d.getDay();
+    }
+
+    @Override
+    public String getType() {
+        return getDateType();
+    }
+
+    @Override
+    public String getInfo() {
+        return getDate();
+    }
     
 }

@@ -28,6 +28,7 @@ public class User implements Serializable{
         emailTypes = new Types();
         socialMediaTypes = new Types();
         dateTypes = new Types();
+        addressTypes = new Types();
     }
     
     public String getUserName(){return userName;}
@@ -46,7 +47,7 @@ public class User implements Serializable{
     
     public Types getEmailTypes(){return emailTypes;}
     
-    public Types socialMediaTypes(){return socialMediaTypes;}
+    public Types getSocialMediaTypes(){return socialMediaTypes;}
     
     public Types dateTypes(){return dateTypes;}
     

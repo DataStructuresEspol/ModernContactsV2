@@ -11,6 +11,7 @@ C:\Users\USER\Documents\NetBeansProjects\ProyectoED\ModernContactsV2\src\main\ja
 C:\Users\USER\Documents\NetBeansProjects\ProyectoED\ModernContactsV2\src\main\java\dsa\contacts\model\Person.java
 C:\Users\USER\Documents\NetBeansProjects\ProyectoED\ModernContactsV2\src\main\java\dsa\contacts\util\ViewDisplay.java
 C:\Users\USER\Documents\NetBeansProjects\ProyectoED\ModernContactsV2\src\main\java\dsa\contacts\controllers\RegisterController.java
+C:\Users\USER\Documents\NetBeansProjects\ProyectoED\ModernContactsV2\src\main\java\dsa\contacts\controllers\ChoiceController.java
 C:\Users\USER\Documents\NetBeansProjects\ProyectoED\ModernContactsV2\src\main\java\dsa\contacts\model\exceptions\ValidationException.java
 C:\Users\USER\Documents\NetBeansProjects\ProyectoED\ModernContactsV2\src\main\java\dsa\contacts\util\Util.java
 C:\Users\USER\Documents\NetBeansProjects\ProyectoED\ModernContactsV2\src\main\java\dsa\contacts\model\exceptions\ModelException.java
@@ -29,3 +30,4 @@ C:\Users\USER\Documents\NetBeansProjects\ProyectoED\ModernContactsV2\src\main\ja
 C:\Users\USER\Documents\NetBeansProjects\ProyectoED\ModernContactsV2\src\main\java\dsa\contacts\model\exceptions\UserNotFoundException.java
 C:\Users\USER\Documents\NetBeansProjects\ProyectoED\ModernContactsV2\src\main\java\dsa\contacts\model\exceptions\InvalidPasswordException.java
 C:\Users\USER\Documents\NetBeansProjects\ProyectoED\ModernContactsV2\src\main\java\module-info.java
+C:\Users\USER\Documents\NetBeansProjects\ProyectoED\ModernContactsV2\src\main\java\dsa\contacts\model\Info.java

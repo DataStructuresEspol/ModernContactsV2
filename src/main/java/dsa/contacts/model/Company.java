@@ -12,4 +12,6 @@ public class Company extends Contact{
     public Company(String name, Phone phones){
         super(name, phones);
     }
+    
+    public Company(){super();}
 }
