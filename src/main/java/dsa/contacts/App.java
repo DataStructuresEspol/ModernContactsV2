@@ -19,6 +19,7 @@ import javafx.scene.control.Alert.AlertType;
 
 public class App extends Application {
     public static String PATH = "src/main/resources/dsa/contacts/";
+    public static String IMAGEPATH = PATH+"assets/images/";
     public static ArrayList<User> users;
     private static Scene scene;
     public static Stack<String> recorrido = new Stack();

@@ -2,14 +2,21 @@
 package dsa.contacts.util;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 
 
 public class Util {
+    
+    public static Image loadImage(String ruta) throws FileNotFoundException{
+        FileInputStream fileInputStream = new FileInputStream(ruta);
+        return new Image(fileInputStream);
+    }
     public static void createSer(String ruta, Object o) throws IOException{
         System.out.println(ruta);
         FileOutputStream fileOutputStream = new FileOutputStream(ruta);

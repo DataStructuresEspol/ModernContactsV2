@@ -40,6 +40,7 @@ public class Contact implements Serializable{
         socialMedias = new ArrayList<>();
         pics = new ArrayList<>();
         dates = new ArrayList<>();
+        joinedGroups = new ArrayList<>();
         tags = new ArrayList<>();
         relatedContacts = new LinkedList<>();
     }
