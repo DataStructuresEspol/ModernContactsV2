@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 public class ChoiceController implements Initializable {
 
     public static Contact preContact;
+    public static String choice;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -24,12 +25,14 @@ public class ChoiceController implements Initializable {
     @FXML
     private void addPerson(MouseEvent event) throws IOException {
         preContact = new Person();
+        choice = "person";
         App.setRoot("addContact");
     }
 
     @FXML
     private void AddCompany(MouseEvent event) throws IOException {
         preContact = new Company();
+        choice = "company";
         App.setRoot("addContact");
     }
 

@@ -6,6 +6,7 @@ import dsa.contacts.model.Address;
 import dsa.contacts.model.Contact;
 import dsa.contacts.model.Email;
 import dsa.contacts.model.Info;
+import dsa.contacts.model.Person;
 import dsa.contacts.model.Phone;
 import dsa.contacts.model.SocialMedia;
 import dsa.contacts.model.Types;
@@ -84,7 +85,9 @@ public class AddContactController {
         user = Logger.loggedUser;
         checkView.setVisible(false);
         newContact = ChoiceController.preContact;
-        
+        if (ChoiceController.choice.equals("company")){
+            apellidoField.setVisible(false);
+        }
         infoOtro = new TextField();
         entryGroup = new TextField();
         entryGroup.setStyle("-fx-border-width: 1");
@@ -362,7 +365,13 @@ public class AddContactController {
         //Agregar validaciones
         newContact.setNombre(nameField.getText());
         if (newContact.getProfilePic()==null){newContact.setProfilePic("default.png");}
-        Logger.loggedUser.getContacts().add(newContact);
+        if (ChoiceController.choice.equals("person")){
+            Person p = (Person) newContact;
+            p.setLastName(apellidoField.getText());
+            Logger.loggedUser.getContacts().add(p);
+        }
+        else{Logger.loggedUser.getContacts().add(newContact);}
+        
         App.save();
         App.retroceder();
     }

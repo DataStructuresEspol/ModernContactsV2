@@ -108,14 +108,14 @@
          <content>
             <VBox alignment="TOP_CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="1264.0" spacing="10.0" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #50e4d8,#FFFFFF);">
                <children>
-                  <VBox spacing="5.0">
+                  <VBox alignment="TOP_CENTER" spacing="5.0">
                      <children>
                         <Label text="Grupo">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="groupLabel" prefHeight="27.0" prefWidth="54.0">
+                        <Label fx:id="groupLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="317.0">
                            <font>
                               <Font size="18.0" />
                            </font>

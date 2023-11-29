@@ -3,9 +3,11 @@ package dsa.contacts.controllers;
 
 import dsa.contacts.App;
 import dsa.contacts.model.Address;
+import dsa.contacts.model.Company;
 import dsa.contacts.model.Contact;
 import dsa.contacts.model.Email;
 import dsa.contacts.model.Info;
+import dsa.contacts.model.Person;
 import dsa.contacts.model.Phone;
 import dsa.contacts.model.SocialMedia;
 import dsa.contacts.model.Types;
@@ -81,6 +83,12 @@ public class EditContactController {
     private void initialize() throws FileNotFoundException{
         user = Logger.loggedUser;
         editedContact = ContactInfoController.selectedContact;
+        if (editedContact instanceof Company){
+            apellidoField.setVisible(false);
+        }
+        else{
+            apellidoField.setText(((Person)editedContact).getLastName());}
+        
         nameField.setText(editedContact.getName());
         checkView.setVisible(false);
         infoOtro = new TextField();
@@ -91,6 +99,7 @@ public class EditContactController {
         initBox(emailTypeBox, user.getEmailTypes(), editedContact.getEmails(), emailField);
         initBox(addressTypeBox, user.getAddressTypes(), editedContact.getAddresses(), addressField);
         initBox(socialMediaTypeBox, user.getSocialMediaTypes(), editedContact.getSocialMedias(), socialMediaField);
+        initGroups();
         initValues();
     }
     @FXML
@@ -107,14 +116,23 @@ public class EditContactController {
         }
     }
     private void initValues(){
-        phoneTypeBox.setValue(editedContact.getPhones().get(0).getType());
-        phoneField.setText(editedContact.getPhones().get(0).getInfo());
-        emailTypeBox.setValue(editedContact.getEmails().get(0).getType());
-        emailField.setText(editedContact.getEmails().get(0).getInfo());
-        addressTypeBox.setValue(editedContact.getAddresses().get(0).getType());
-        addressField.setText(editedContact.getAddresses().get(0).getInfo());
-        socialMediaTypeBox.setValue(editedContact.getSocialMedias().get(0).getType());
-        socialMediaField.setText(editedContact.getSocialMedias().get(0).getInfo());
+        if (!editedContact.getPhones().isEmpty()){
+            phoneTypeBox.setValue(editedContact.getPhones().get(0).getType());
+            phoneField.setText(editedContact.getPhones().get(0).getInfo());
+        }
+        if (!editedContact.getEmails().isEmpty()){
+            emailTypeBox.setValue(editedContact.getEmails().get(0).getType());
+            emailField.setText(editedContact.getEmails().get(0).getInfo());
+        }
+        if (!editedContact.getAddresses().isEmpty()){
+            addressTypeBox.setValue(editedContact.getAddresses().get(0).getType());
+            addressField.setText(editedContact.getAddresses().get(0).getInfo());
+        }
+        
+        if (!editedContact.getSocialMedias().isEmpty()){
+            socialMediaTypeBox.setValue(editedContact.getSocialMedias().get(0).getType());
+            socialMediaField.setText(editedContact.getSocialMedias().get(0).getInfo());
+        }
     }
     private void initBox(ComboBox<String> box, Types items,List<? extends Info> info, TextField field){
         ObservableList<String> opcionesObservable = FXCollections.observableArrayList(items.getTypes());
@@ -374,6 +392,10 @@ public class EditContactController {
 
     @FXML
     private void saveContact(ActionEvent event) throws IOException {
+        if (editedContact instanceof Person){
+            Person p = (Person) editedContact;
+            p.setLastName(apellidoField.getText());
+        }
         App.save();
         App.retroceder();
     }
