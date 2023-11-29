@@ -1,0 +1,20 @@
+.scroll-bar:vertical{
+    -fx-background-color: transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: #353536;
+    -fx-border-color: #353536;
+    -fx-border: 2px;
+}
+
+.scroll-bar:vertical .track{
+    -fx-background-color: #353536;
+    -fx-border-color: #353536;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #00F5A0,#00D9F5);
+    -fx-background-radius: 5em;
+}
