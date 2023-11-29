@@ -72,7 +72,8 @@ public class ContactInfoController {
     }
 
     @FXML
-    private void editContact(MouseEvent event) {
+    private void editContact(MouseEvent event) throws IOException {
+        App.setRoot("editContact");
     }
 
     @FXML
