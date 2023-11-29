@@ -28,7 +28,7 @@
           <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
         </rowConstraints>
          <children>
-            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="50.0" fitWidth="50.0" onMouseClicked="#regresar" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@assets/icon/back.png" />
                </image>
@@ -68,7 +68,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <TextField prefHeight="25.0" prefWidth="143.0" promptText="Nombre del contacto">
+            <TextField fx:id="nameField" prefHeight="25.0" prefWidth="143.0" promptText="Nombre del contacto">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -90,16 +90,25 @@
                   <Image url="@assets/images/google.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-               <image>
-                  <Image url="@assets/icon/arrow-right.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="64.0" fitWidth="64.0" onMouseClicked="#prevPic" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@assets/icon/arrow-left.png" />
                </image>
             </ImageView>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
+               <children>
+                  <ImageView fitHeight="64.0" fitWidth="64.0" onMouseClicked="#nextPic" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/icon/arrow-right.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="31.0" fitWidth="40.0" onMouseClicked="#addPic" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/icon/add-outline.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
          </children>
          <VBox.margin>
             <Insets top="15.0" />

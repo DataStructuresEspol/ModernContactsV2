@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -74,7 +75,10 @@ public class AddContactController {
     private ImageView profilePic;
     @FXML
     private TextField nameField;
+    
+    int picView;
     @FXML
+    private TextField apellidoField;
     public void initialize(){
         user = Logger.loggedUser;
         checkView.setVisible(false);
@@ -294,15 +298,70 @@ public class AddContactController {
             try {
             Util.copiarImagen(rutaArchivo, rutaFinal);
             profilePic.setImage(Util.loadImage(rutaFinal));
+            newContact.setProfilePic(rutaFinal);
             System.out.println("Imagen copiada con éxito."+rutaFinal);
         } catch (IOException e) {
             System.out.println("Error al copiar la imagen: " + e.getMessage());
             profilePic.setImage(Util.loadImage(rutaFinal));
+            newContact.setProfilePic(rutaFinal);
         }
 
         } else {
             System.out.println("Selección de foto cancelada por el usuario");
         }
+    }
+
+    @FXML
+    private void prevPic(MouseEvent event) throws FileNotFoundException {
+        if (picView > 0){picView--;}
+        else{picView = newContact.getPics().size()-1;}
+        profilePic.setImage(Util.loadImage(newContact.getPics().get(picView)));
+    }
+
+    @FXML
+    private void nextPic(MouseEvent event) throws FileNotFoundException {
+        picView = (picView+1)%newContact.getPics().size();
+        profilePic.setImage(Util.loadImage(newContact.getPics().get(picView)));
+    }
+
+    @FXML
+    private void addPic(MouseEvent event) throws FileNotFoundException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccione una imagen");
+
+        // Configurar el filtro para mostrar solo archivos de imagen (por ejemplo, PNG, JPG)
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.jpeg");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Mostrar el cuadro de diálogo de selección de archivo
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            String rutaArchivo = selectedFile.getAbsolutePath();
+            String nombreCompleto = selectedFile.getName();
+            int indexPunto = nombreCompleto.lastIndexOf('.');
+            String nombre = nombreCompleto.substring(0, indexPunto);
+            String rutaFinal = App.IMAGEPATH+nombre+"_copy.png";
+            try {
+            Util.copiarImagen(rutaArchivo, rutaFinal);
+            newContact.getPics().add(rutaFinal);
+            System.out.println("Imagen copiada con éxito."+rutaFinal);
+        } catch (IOException e) {
+            System.out.println("Error al copiar la imagen: " + e.getMessage());
+            newContact.getPics().add(rutaFinal);
+        }
+
+        } else {
+            System.out.println("Selección de foto cancelada por el usuario");
+        }
+    }
+
+    @FXML
+    private void saveContact(ActionEvent event) throws IOException {
+        //Agregar validaciones
+        newContact.setNombre(nameField.getText());
+        Logger.loggedUser.getContacts().add(newContact);
+        App.save();
     }
     
 
