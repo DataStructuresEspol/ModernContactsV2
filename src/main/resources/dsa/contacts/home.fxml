@@ -204,11 +204,17 @@
                <image>
                   <Image url="@assets/icon/arrow-left.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
             <ImageView fitHeight="64.0" fitWidth="200.0" onMouseClicked="#nextContact" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
                   <Image url="@assets/icon/arrow-right.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
          </children>
          <VBox.margin>
