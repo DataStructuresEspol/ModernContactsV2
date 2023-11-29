@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #50e4d8,#FFFFFF);" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dsa.contacts.controllers.HomeController">
@@ -188,25 +187,25 @@
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" GridPane.columnIndex="1">
                <children>
-                  <Label text="Nombre de contacto X">
+                  <Label fx:id="contactName" text="Nombre de contacto X">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Circle fill="#99999954" radius="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="contactPic" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="favoriteIcon" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#setFavorite" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@assets/icon/favorite.png" />
                      </image>
                   </ImageView>
                </children>
             </VBox>
-            <ImageView fitHeight="64.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="64.0" fitWidth="200.0" onMouseClicked="#prevContact" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@assets/icon/arrow-left.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="64.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+            <ImageView fitHeight="64.0" fitWidth="200.0" onMouseClicked="#nextContact" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
                   <Image url="@assets/icon/arrow-right.png" />
                </image>
@@ -216,7 +215,7 @@
             <Insets top="20.0" />
          </VBox.margin>
       </GridPane>
-      <Label text="Hola, User!">
+      <Label fx:id="saludo" text="Hola, User!">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>

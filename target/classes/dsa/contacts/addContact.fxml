@@ -73,6 +73,12 @@
                   <Insets />
                </HBox.margin>
             </TextField>
+            <Label text="Apellido">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="apellidoField" prefHeight="25.0" prefWidth="143.0" promptText="Apellido del contacto" />
          </children>
       </HBox>
       <GridPane>
@@ -305,6 +311,7 @@
                         </GridPane>
                      </children>
                   </VBox>
+                  <Button mnemonicParsing="false" onAction="#saveContact" text="guardar contacto" />
                   <Button mnemonicParsing="false" onMouseClicked="#regresar" text="regresar" />
                </children>
             </VBox>

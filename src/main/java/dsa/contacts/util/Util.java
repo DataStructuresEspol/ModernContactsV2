@@ -21,7 +21,6 @@ public class Util {
         return new Image(fileInputStream);
     }
     public static void createSer(String ruta, Object o) throws IOException{
-        System.out.println(ruta);
         FileOutputStream fileOutputStream = new FileOutputStream(ruta);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
         objectOutputStream.writeObject(o);

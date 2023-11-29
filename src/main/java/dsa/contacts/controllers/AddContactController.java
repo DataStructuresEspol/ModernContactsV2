@@ -79,6 +79,7 @@ public class AddContactController {
     int picView;
     @FXML
     private TextField apellidoField;
+    @FXML
     public void initialize(){
         user = Logger.loggedUser;
         checkView.setVisible(false);

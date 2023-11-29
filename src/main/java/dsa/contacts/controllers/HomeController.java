@@ -1,6 +1,10 @@
 package dsa.contacts.controllers;
 
 import dsa.contacts.App;
+import dsa.contacts.model.Contact;
+import dsa.contacts.util.Logger;
+import dsa.contacts.util.Util;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -9,8 +13,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Circle;
 
 public class HomeController {
     private HashSet<String> groups;
@@ -45,7 +51,18 @@ public class HomeController {
     @FXML
     private ImageView addTagIcon;
     @FXML
-    private void initialize() {
+    private Label contactName;
+    
+    private LinkedList<Contact> contacts;
+    private int picView;
+    @FXML
+    private ImageView contactPic;
+    @FXML
+    private Label saludo;
+    @FXML
+    private ImageView favoriteIcon;
+    @FXML
+    private void initialize() throws FileNotFoundException {
         groups = new HashSet<>();
         tags = new HashSet<>();
         attributes = new HashSet<>();
@@ -60,6 +77,16 @@ public class HomeController {
         tags.add("Universidad");
         attributes.add("Nombre");
         attributes.add("Apellidos");
+        
+        contacts = Logger.loggedUser.getContacts();
+        System.out.println(contacts.size());
+        saludo.setText("!Hola "+Logger.loggedUser.getUserName()+"!");
+        if (!contacts.isEmpty()){
+            contactPic.setImage(Util.loadImage(contacts.get(0).getProfilePic()));
+            contactName.setText(contacts.get(0).getName());
+        }
+        
+        
     }
 
     @FXML
@@ -140,5 +167,38 @@ public class HomeController {
     @FXML
     private void addContact(MouseEvent event) throws IOException {
         App.setRoot("choice");
+    }
+
+    @FXML
+    private void prevContact(MouseEvent event) throws FileNotFoundException {
+        if (picView > 0){picView--;}
+        else{picView = contacts.size()-1;}
+        contactPic.setImage(Util.loadImage(contacts.get(picView).getProfilePic()));
+        contactName.setText(contacts.get(picView).getName());
+        if (contacts.get(picView).isFavorite()){
+            favoriteIcon.setImage(Util.loadImage(App.ICONPATH+"favorite-solid.png"));
+        }
+        else{favoriteIcon.setImage(Util.loadImage(App.ICONPATH+"favorite.png"));}
+    }
+
+    @FXML
+    private void nextContact(MouseEvent event) throws FileNotFoundException {
+        picView = (picView+1)%contacts.size();
+        contactPic.setImage(Util.loadImage(contacts.get(picView).getProfilePic()));
+        contactName.setText(contacts.get(picView).getName());
+        if (contacts.get(picView).isFavorite()){
+            favoriteIcon.setImage(Util.loadImage(App.ICONPATH+"favorite-solid.png"));
+        }
+        else{favoriteIcon.setImage(Util.loadImage(App.ICONPATH+"favorite.png"));}
+    }
+
+    @FXML
+    private void setFavorite(MouseEvent event) throws FileNotFoundException, IOException {
+        contacts.get(picView).setFavorite();
+        if (contacts.get(picView).isFavorite()){
+            favoriteIcon.setImage(Util.loadImage(App.ICONPATH+"favorite-solid.png"));
+        }
+        else{favoriteIcon.setImage(Util.loadImage(App.ICONPATH+"favorite.png"));}
+        App.save();
     }
 }
