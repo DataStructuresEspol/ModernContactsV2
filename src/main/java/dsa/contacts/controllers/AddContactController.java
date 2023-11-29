@@ -299,12 +299,12 @@ public class AddContactController {
             try {
             Util.copiarImagen(rutaArchivo, rutaFinal);
             profilePic.setImage(Util.loadImage(rutaFinal));
-            newContact.setProfilePic(rutaFinal);
+            newContact.setProfilePic(nombre+"_copy.png");
             System.out.println("Imagen copiada con éxito."+rutaFinal);
         } catch (IOException e) {
             System.out.println("Error al copiar la imagen: " + e.getMessage());
             profilePic.setImage(Util.loadImage(rutaFinal));
-            newContact.setProfilePic(rutaFinal);
+            newContact.setProfilePic(nombre+"_copy.png");
         }
 
         } else {
@@ -316,13 +316,13 @@ public class AddContactController {
     private void prevPic(MouseEvent event) throws FileNotFoundException {
         if (picView > 0){picView--;}
         else{picView = newContact.getPics().size()-1;}
-        profilePic.setImage(Util.loadImage(newContact.getPics().get(picView)));
+        profilePic.setImage(Util.loadImage(App.IMAGEPATH+newContact.getPics().get(picView)));
     }
 
     @FXML
     private void nextPic(MouseEvent event) throws FileNotFoundException {
         picView = (picView+1)%newContact.getPics().size();
-        profilePic.setImage(Util.loadImage(newContact.getPics().get(picView)));
+        profilePic.setImage(Util.loadImage(App.IMAGEPATH+newContact.getPics().get(picView)));
     }
 
     @FXML
@@ -345,11 +345,11 @@ public class AddContactController {
             String rutaFinal = App.IMAGEPATH+nombre+"_copy.png";
             try {
             Util.copiarImagen(rutaArchivo, rutaFinal);
-            newContact.getPics().add(rutaFinal);
+            newContact.getPics().add(nombre+"_copy.png");
             System.out.println("Imagen copiada con éxito."+rutaFinal);
         } catch (IOException e) {
             System.out.println("Error al copiar la imagen: " + e.getMessage());
-            newContact.getPics().add(rutaFinal);
+            newContact.getPics().add(nombre+"_copy.png");
         }
 
         } else {
@@ -361,8 +361,10 @@ public class AddContactController {
     private void saveContact(ActionEvent event) throws IOException {
         //Agregar validaciones
         newContact.setNombre(nameField.getText());
+        if (newContact.getProfilePic()==null){newContact.setProfilePic("default.png");}
         Logger.loggedUser.getContacts().add(newContact);
         App.save();
+        App.retroceder();
     }
     
 

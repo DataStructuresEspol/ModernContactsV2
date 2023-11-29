@@ -66,7 +66,7 @@
             <Insets top="20.0" />
          </VBox.margin>
       </GridPane>
-      <Label fx:id="nameLable">
+      <Label fx:id="nameLabel">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -115,7 +115,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label>
+                        <Label fx:id="groupLabel" prefHeight="27.0" prefWidth="54.0">
                            <font>
                               <Font size="18.0" />
                            </font>

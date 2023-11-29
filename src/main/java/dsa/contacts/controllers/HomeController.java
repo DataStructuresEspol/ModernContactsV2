@@ -82,8 +82,12 @@ public class HomeController {
         System.out.println(contacts.size());
         saludo.setText("!Hola "+Logger.loggedUser.getUserName()+"!");
         if (!contacts.isEmpty()){
-            contactPic.setImage(Util.loadImage(contacts.get(0).getProfilePic()));
+            contactPic.setImage(Util.loadImage(App.IMAGEPATH+contacts.get(0).getProfilePic()));
             contactName.setText(contacts.get(0).getName());
+            if (contacts.get(picView).isFavorite()){
+                favoriteIcon.setImage(Util.loadImage(App.ICONPATH+"favorite-solid.png"));
+            }
+            else{favoriteIcon.setImage(Util.loadImage(App.ICONPATH+"favorite.png"));}
         }
         
         
@@ -173,7 +177,7 @@ public class HomeController {
     private void prevContact(MouseEvent event) throws FileNotFoundException {
         if (picView > 0){picView--;}
         else{picView = contacts.size()-1;}
-        contactPic.setImage(Util.loadImage(contacts.get(picView).getProfilePic()));
+        contactPic.setImage(Util.loadImage(App.IMAGEPATH+contacts.get(picView).getProfilePic()));
         contactName.setText(contacts.get(picView).getName());
         if (contacts.get(picView).isFavorite()){
             favoriteIcon.setImage(Util.loadImage(App.ICONPATH+"favorite-solid.png"));
@@ -184,7 +188,7 @@ public class HomeController {
     @FXML
     private void nextContact(MouseEvent event) throws FileNotFoundException {
         picView = (picView+1)%contacts.size();
-        contactPic.setImage(Util.loadImage(contacts.get(picView).getProfilePic()));
+        contactPic.setImage(Util.loadImage(App.IMAGEPATH+contacts.get(picView).getProfilePic()));
         contactName.setText(contacts.get(picView).getName());
         if (contacts.get(picView).isFavorite()){
             favoriteIcon.setImage(Util.loadImage(App.ICONPATH+"favorite-solid.png"));
@@ -200,5 +204,12 @@ public class HomeController {
         }
         else{favoriteIcon.setImage(Util.loadImage(App.ICONPATH+"favorite.png"));}
         App.save();
+    }
+
+    @FXML
+    private void infoContact(MouseEvent event) throws IOException {
+        ContactInfoController.selectedContact = contacts.get(picView);
+        App.setRoot("contactInfo");
+        
     }
 }
