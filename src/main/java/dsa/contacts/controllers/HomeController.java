@@ -1,9 +1,16 @@
 package dsa.contacts.controllers;
 
+import dsa.contacts.ds.ArrayList;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+
 import dsa.contacts.App;
 import dsa.contacts.model.Contact;
 import dsa.contacts.util.Logger;
 import dsa.contacts.util.Util;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import javafx.fxml.FXML;
@@ -11,12 +18,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-
-import java.util.HashSet;
-import java.util.LinkedList;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Circle;
 
 public class HomeController {
     private HashSet<String> groups;
@@ -53,7 +56,8 @@ public class HomeController {
     @FXML
     private Label contactName;
     
-    private LinkedList<Contact> contacts;
+    private ArrayList<Contact> contacts;
+
     private int picView;
     @FXML
     private ImageView contactPic;
@@ -77,10 +81,32 @@ public class HomeController {
         tags.add("Universidad");
         attributes.add("Nombre");
         attributes.add("Apellidos");
-        
-        contacts = Logger.loggedUser.getContacts();
+
+        restoreContacts();
+
         System.out.println(contacts.size());
         saludo.setText("!Hola "+Logger.loggedUser.getUserName()+"!");
+
+        updateView();
+
+        // Ordering contacts
+        nameOrder.setOnAction(order -> {
+            if (nameOrder.getValue().equals("Ascendente")) {
+                Collections.sort(contacts, Comparator.comparing(Contact::getName));
+            } else {
+                Collections.sort(contacts, Comparator.comparing(Contact::getName).reversed());
+            }
+            try {
+                updateView();
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
+        });
+        
+    }
+
+    private void updateView() throws FileNotFoundException {
         if (!contacts.isEmpty()){
             contactPic.setImage(Util.loadImage(App.IMAGEPATH+contacts.get(0).getProfilePic()));
             contactName.setText(contacts.get(0).getName());
@@ -90,8 +116,11 @@ public class HomeController {
             }
             else{favoriteIcon.setImage(Util.loadImage(App.ICONPATH+"favorite.png"));}
         }
-        
-        
+    }
+
+    private void restoreContacts() {
+        contacts = new ArrayList<>();
+        contacts.addAll(Logger.loggedUser.getContacts());
     }
 
     @FXML
@@ -213,4 +242,6 @@ public class HomeController {
         App.setRoot("contactInfo");
         
     }
+
+
 }
