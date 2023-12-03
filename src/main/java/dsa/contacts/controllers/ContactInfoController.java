@@ -54,11 +54,6 @@ public class ContactInfoController {
         initInfo(addressLabel,selectedContact.getAddresses());
         initInfo(socialMediaLabel,selectedContact.getSocialMedias());
         initInfo(dateLabel, selectedContact.getDates());
-        //phoneLabel.setText(infoString(selectedContact.getPhones()));
-        //emailLabel.setText(infoString(selectedContact.getEmails()));
-        //addressLabel.setText(infoString(selectedContact.getAddresses()));
-        //socialMediaLabel.setText(infoString(selectedContact.getSocialMedias()));
-        //dateLabel.setText(infoString(selectedContact.getDates()));
         tagLabel.setText(tagLabelString());
         if (selectedContact.isFavorite()){
             favoriteIcon.setImage(Util.loadImage(App.ICONPATH+"favorite-solid.png"));
@@ -114,13 +109,6 @@ public class ContactInfoController {
         return groups;
     }
     
-    private String infoString(List<? extends Info> listInfo){
-        String info="";
-        for(Info i: listInfo){
-            info += i.getType()+": "+i.getInfo()+"\n";
-        }
-        return info;
-    }
     
     private String tagLabelString(){
         String groups="";
