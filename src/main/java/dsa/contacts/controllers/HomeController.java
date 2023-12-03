@@ -77,7 +77,6 @@ public class HomeController {
 
         nameOrder.getItems().addAll("Ascendente", "Descendente");
         countryOrder.getItems().addAll("Ascendente", "Descendente");
-
         // TODO: get groups, tags and attributes from database (data)
         groups.add("Familia");
         groups.add("Amigos");
@@ -87,7 +86,6 @@ public class HomeController {
         tags.add("familia");
         attributes.add("Nombre");
         attributes.add("Apellidos");
-
         restoreContacts();
 
         System.out.println(contacts.size());

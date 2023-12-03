@@ -36,26 +36,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="192.0" spacing="30.0" GridPane.columnIndex="2">
-               <children>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@assets/icon/remove.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-                  <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@assets/icon/edit.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </ImageView>
-               </children>
-            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="192.0" spacing="30.0" GridPane.columnIndex="2" />
          </children>
          <VBox.margin>
             <Insets top="20.0" />
@@ -93,7 +74,7 @@
          <children>
             <ImageView fx:id="profilePic" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#selectPic" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
-                  <Image url="@assets/images/google.png" />
+                  <Image url="@assets/images/default.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="64.0" fitWidth="64.0" onMouseClicked="#prevPic" pickOnBounds="true" preserveRatio="true">
@@ -388,10 +369,20 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <Button mnemonicParsing="false" onAction="#saveContact" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 10;" text="Guardar">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
+                  <HBox alignment="TOP_CENTER" prefHeight="27.0" prefWidth="265.0" spacing="10.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#saveContact" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 10;" text="Guardar">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#VerContactosRelacionados" prefHeight="27.0" prefWidth="154.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 10;" text="Contactos Relacionados">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </content>
