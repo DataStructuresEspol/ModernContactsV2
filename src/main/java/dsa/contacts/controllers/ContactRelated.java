@@ -32,10 +32,6 @@ public class ContactRelated {
         }
     }
 
-    @FXML
-    private void regresar(MouseEvent event) throws IOException {
-        App.retroceder();
-    }
 
     @FXML
     private void prevPic(MouseEvent event) throws FileNotFoundException {

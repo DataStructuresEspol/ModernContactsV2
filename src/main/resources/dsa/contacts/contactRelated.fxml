@@ -25,14 +25,6 @@
           <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
         </rowConstraints>
          <children>
-            <ImageView fitHeight="50.0" fitWidth="50.0" onMouseClicked="#regresar" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@assets/icon/back.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
             <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="192.0" spacing="30.0" GridPane.columnIndex="2" />
          </children>
          <VBox.margin>
