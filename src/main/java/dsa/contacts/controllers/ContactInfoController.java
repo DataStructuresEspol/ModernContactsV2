@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 
 public class ContactInfoController {
 
@@ -48,11 +49,16 @@ public class ContactInfoController {
         else{nameLabel.setText(selectedContact.getName());}
         profilePic.setImage(Util.loadImage(App.IMAGEPATH+selectedContact.getProfilePic()));
         groupLabel.setText(this.groupLabelString());
-        phoneLabel.setText(infoString(selectedContact.getPhones()));
-        emailLabel.setText(infoString(selectedContact.getEmails()));
-        addressLabel.setText(infoString(selectedContact.getAddresses()));
-        socialMediaLabel.setText(infoString(selectedContact.getSocialMedias()));
-        dateLabel.setText(infoString(selectedContact.getDates()));
+        initInfo(phoneLabel,selectedContact.getPhones());
+        initInfo(emailLabel, selectedContact.getEmails());
+        initInfo(addressLabel,selectedContact.getAddresses());
+        initInfo(socialMediaLabel,selectedContact.getSocialMedias());
+        initInfo(dateLabel, selectedContact.getDates());
+        //phoneLabel.setText(infoString(selectedContact.getPhones()));
+        //emailLabel.setText(infoString(selectedContact.getEmails()));
+        //addressLabel.setText(infoString(selectedContact.getAddresses()));
+        //socialMediaLabel.setText(infoString(selectedContact.getSocialMedias()));
+        //dateLabel.setText(infoString(selectedContact.getDates()));
         tagLabel.setText(tagLabelString());
         if (selectedContact.isFavorite()){
             favoriteIcon.setImage(Util.loadImage(App.ICONPATH+"favorite-solid.png"));
@@ -122,5 +128,12 @@ public class ContactInfoController {
             groups += "\t"+s;
         }
         return groups;
+    }
+    
+    private void initInfo(Label lbl, List<? extends Info> listInfo){
+        VBox box = (VBox)lbl.getParent();
+        for (Info i: listInfo){
+            box.getChildren().add(new Label(i.getType()+": "+i.getInfo()));
+        }
     }
 }
