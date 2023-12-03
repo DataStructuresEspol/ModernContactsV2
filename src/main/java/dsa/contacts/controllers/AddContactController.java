@@ -2,6 +2,7 @@
 package dsa.contacts.controllers;
 
 import dsa.contacts.App;
+import static dsa.contacts.App.loadFXML;
 import dsa.contacts.model.Address;
 import dsa.contacts.model.Contact;
 import dsa.contacts.model.Email;
@@ -452,6 +453,26 @@ public class AddContactController {
         }
         
         selectedTagLabel = lbl;
+    }
+
+    @FXML
+    private void VerContactosRelacionados(MouseEvent event) throws IOException {
+        // Crear la nueva ventana
+        Stage nuevaVentana = new Stage();
+        nuevaVentana.setTitle("Contactos relacionados");
+
+        // Crear contenido para la nueva ventana
+        StackPane contenido = new StackPane();
+        HBox box = new HBox();
+        
+        contenido.getChildren().add(box);
+
+        // Crear la escena y agregar el contenido
+        Scene scene = new Scene(loadFXML("contactRelated"), 500, 500);
+        nuevaVentana.setScene(scene);
+
+        // Mostrar la nueva ventana
+        nuevaVentana.show();
     }
     
 

@@ -70,10 +70,8 @@ public class HomeController {
         groups = new HashSet<>();
         tags = new HashSet<>();
         attributes = new HashSet<>();
-
         nameOrder.getItems().addAll("Ascendente", "Descendente");
         countryOrder.getItems().addAll("Ascendente", "Descendente");
-
         // TODO: get groups, tags and attributes from database (data)
         groups.add("Familia");
         groups.add("Amigos");
@@ -81,7 +79,6 @@ public class HomeController {
         tags.add("Universidad");
         attributes.add("Nombre");
         attributes.add("Apellidos");
-
         restoreContacts();
 
         System.out.println(contacts.size());
@@ -120,7 +117,9 @@ public class HomeController {
 
     private void restoreContacts() {
         contacts = new ArrayList<>();
+        System.out.println("asd");
         contacts.addAll(Logger.loggedUser.getContacts());
+        System.out.println("asd2");
     }
 
     @FXML

@@ -132,11 +132,12 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public void add(int index, E element) {
-        if (index < 0 || index >= capacidad) throw new IndexOutOfBoundsException(index);
-        // i esta entre 0 y indice final
         if (n == capacidad) {
             growArray();
         };
+        if (index < 0 || index >= capacidad) throw new IndexOutOfBoundsException(index);
+        // i esta entre 0 y indice final
+        
         // i esta entre 0 y capacidad - 1
 
         for (int i = n; i > index; i--) {

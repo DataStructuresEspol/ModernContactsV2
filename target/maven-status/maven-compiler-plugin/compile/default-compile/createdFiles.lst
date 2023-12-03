@@ -8,6 +8,7 @@ dsa\contacts\model\Contact.class
 dsa\contacts\model\exceptions\InvalidPasswordException.class
 dsa\contacts\App.class
 dsa\contacts\controllers\AddContactController.class
+dsa\contacts\controllers\ContactRelated.class
 dsa\contacts\model\Email.class
 dsa\contacts\model\Address.class
 dsa\contacts\controllers\EditContactController.class
