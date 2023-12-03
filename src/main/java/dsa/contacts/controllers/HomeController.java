@@ -2,11 +2,11 @@ package dsa.contacts.controllers;
 
 import dsa.contacts.ds.ArrayList;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 
 import dsa.contacts.App;
+import dsa.contacts.logic.*;
 import dsa.contacts.model.Contact;
 import dsa.contacts.util.Logger;
 import dsa.contacts.util.Util;
@@ -65,11 +65,15 @@ public class HomeController {
     private Label saludo;
     @FXML
     private ImageView favoriteIcon;
+
+    // Filter
+    private ArrayList<Filter> filters;
     @FXML
     private void initialize() throws FileNotFoundException {
         groups = new HashSet<>();
         tags = new HashSet<>();
         attributes = new HashSet<>();
+        filters = new ArrayList<>();
 
         nameOrder.getItems().addAll("Ascendente", "Descendente");
         countryOrder.getItems().addAll("Ascendente", "Descendente");
@@ -77,8 +81,10 @@ public class HomeController {
         // TODO: get groups, tags and attributes from database (data)
         groups.add("Familia");
         groups.add("Amigos");
+        groups.add("panas");
         tags.add("Trabajo");
         tags.add("Universidad");
+        tags.add("familia");
         attributes.add("Nombre");
         attributes.add("Apellidos");
 
@@ -90,18 +96,55 @@ public class HomeController {
         updateView();
 
         // Ordering contacts
+
+        // Order by name
         nameOrder.setOnAction(order -> {
             if (nameOrder.getValue().equals("Ascendente")) {
-                Collections.sort(contacts, Comparator.comparing(Contact::getName));
+                contacts.sort(Comparator.comparing(Contact::getName));
             } else {
-                Collections.sort(contacts, Comparator.comparing(Contact::getName).reversed());
+                contacts.sort(Comparator.comparing(Contact::getName).reversed());
             }
             try {
                 updateView();
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
+        });
 
+        // Filters
+
+        // filter if favorite
+        favorite.setOnAction(fav -> {
+            if (favorite.isSelected()){
+                Filter f = new Favorite();
+                filters.add(f);
+            }
+            else{
+                filters.remove(new Favorite());
+            }
+            updateFilters();
+        });
+
+        // filter by type
+        // person
+        person.setOnAction(p -> {
+            if (person.isSelected()) {
+                Filter f = new isPerson();
+                filters.add(f);
+            } else {
+                filters.remove(new isPerson());
+            }
+            updateFilters();
+        });
+
+        company.setOnAction(filter-> {
+            if (company.isSelected()) {
+                Filter f = new isCompany();
+                filters.add(f);
+            } else {
+                filters.remove(new isCompany());
+            }
+            updateFilters();
         });
         
     }
@@ -115,6 +158,9 @@ public class HomeController {
                 favoriteIcon.setImage(Util.loadImage(App.ICONPATH+"favorite-solid.png"));
             }
             else{favoriteIcon.setImage(Util.loadImage(App.ICONPATH+"favorite.png"));}
+        } else {
+            contactPic.setImage(Util.loadImage(App.IMAGEPATH+"default.png"));
+            contactName.setText("No hay contactos");
         }
     }
 
@@ -130,17 +176,17 @@ public class HomeController {
 
     @FXML
     private void addGroup() {
-        addElementToFilter(groupList, groups);
+        addElementToFilter(groupList, groups, "group");
     }
 
     @FXML
     private void addTag() {
-        addElementToFilter(tagList, tags);
+        addElementToFilter(tagList, tags, "tag");
     }
 
     @FXML
     private void addAttribute() {
-        addElementToFilter(attributeList, attributes);
+        addElementToFilter(attributeList, attributes, "attribute");
     }
 
     public HashSet<String> getChosenGroups() {
@@ -155,7 +201,7 @@ public class HomeController {
         return getChosenTypes(attributeList);
     }
 
-    private void addElementToFilter(HBox list, HashSet<String> elements) {
+    private void addElementToFilter(HBox list, HashSet<String> elements, String type) {
         if (elements.isEmpty()) {
             return;
         }
@@ -168,15 +214,40 @@ public class HomeController {
             Label label = new Label(choiceBox.getValue());
 
             label.setOnMouseClicked(remove -> {
+                switch (type) {
+                    case "group":
+                        filters.remove(new GroupFilter(label.getText()));
+                        break;
+                    case "tag":
+                        filters.remove(new TagFilter(label.getText()));
+                        break;
+                    case "attribute":
+                        filters.remove(new AttributeFilter(label.getText()));
+                        break;
+                }
+                updateFilters();
                 list.getChildren().remove(label);
                 elements.add(label.getText());
             });
 
-            label.setStyle("-fx-cursor: hand;");
+            switch (type) {
+                case "group":
+                    filters.add(new GroupFilter(choiceBox.getValue()));
+                    break;
+                case "tag":
+                    filters.add(new TagFilter(choiceBox.getValue()));
+                    break;
+                case "attribute":
+                    filters.add(new AttributeFilter(choiceBox.getValue()));
+                    break;
+            }
 
+            label.setStyle("-fx-cursor: hand;");
             list.getChildren().add(list.getChildren().size()-1, label);
             list.getChildren().remove(choiceBox);
             elements.remove(choiceBox.getValue());
+
+            updateFilters();
         });
     }
 
@@ -243,5 +314,16 @@ public class HomeController {
         
     }
 
+    private void updateFilters() {
+        restoreContacts();
+        for (Filter f: filters) {
+            contacts = f.filter(contacts);
+        }
+        try {
+            updateView();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

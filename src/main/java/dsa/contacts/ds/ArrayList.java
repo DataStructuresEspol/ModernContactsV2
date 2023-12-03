@@ -68,7 +68,12 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public boolean add(E e) {
-        add(n, e);
+        if (n != 0) {
+            add(n, e);
+        } else {
+            add(0, e);
+        }
+
         return true;
     }
 
@@ -132,17 +137,16 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public void add(int index, E element) {
-        if (index < 0 || index >= capacidad) throw new IndexOutOfBoundsException(index);
-        // i esta entre 0 y indice final
         if (n == capacidad) {
             growArray();
-        };
-        // i esta entre 0 y capacidad - 1
+        }
+
+        if (index < 0 || index > n) throw new IndexOutOfBoundsException(index);
 
         for (int i = n; i > index; i--) {
             arreglo[i] = arreglo[i-1];
         }
-        arreglo[index] = (E) element;
+        arreglo[index] = element;
         n++;
     }
 
@@ -245,7 +249,7 @@ public class ArrayList<E> implements List<E> {
         private int i;
 
         public ArrayListIterator() {
-            i = 0;
+            i = -1;
         }
 
         public ArrayListIterator(int index) {
@@ -254,36 +258,34 @@ public class ArrayList<E> implements List<E> {
 
         @Override
         public boolean hasNext() {
-            return i < n;
+            return nextIndex() < n;
         }
 
         @Override
         public E next() {
-            E element = arreglo[i];
-            i++;
-            return element;
+            i = nextIndex();
+            return arreglo[i];
         }
 
         @Override
         public boolean hasPrevious() {
-            return i > 0;
+            return previousIndex() > -1;
         }
 
         @Override
         public E previous() {
-            E element = arreglo[i];
-            i--;
-            return element;
+            i = previousIndex();
+            return arreglo[i];
         }
 
         @Override
         public int nextIndex() {
-            return i + 1;
+            return i+1;
         }
 
         @Override
         public int previousIndex() {
-            return i - 1;
+            return i-1;
         }
 
         @Override
