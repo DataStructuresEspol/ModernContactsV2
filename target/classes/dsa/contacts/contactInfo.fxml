@@ -137,7 +137,7 @@
                   </VBox>
                   <VBox alignment="TOP_CENTER" spacing="5.0">
                      <children>
-                        <Label text="Email">
+                        <Label alignment="CENTER" prefHeight="27.0" prefWidth="108.0" text="Email">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
@@ -145,7 +145,7 @@
                         <Label fx:id="emailLabel" />
                      </children>
                   </VBox>
-                  <VBox alignment="TOP_CENTER" spacing="5.0">
+                  <VBox alignment="TOP_CENTER" prefHeight="49.0" prefWidth="128.0" spacing="5.0">
                      <children>
                         <Label text="Direccion">
                            <font>
@@ -155,16 +155,40 @@
                         <Label fx:id="addressLabel" />
                      </children>
                   </VBox>
-                  <VBox alignment="TOP_CENTER" spacing="5.0">
+                  <VBox alignment="TOP_CENTER" prefHeight="49.0" prefWidth="102.0" spacing="5.0">
                      <children>
                         <Label text="Redes">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
+                        <Label fx:id="socialMediaLabel" />
                      </children>
                   </VBox>
-                  <Label fx:id="socialMediaLabel" />
+                  <VBox alignment="TOP_CENTER" prefHeight="49.0" prefWidth="222.0" spacing="5.0">
+                     <children>
+                        <Label text="Fechas">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="dateLabel" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" spacing="5.0">
+                     <children>
+                        <Label text="Tags">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="tagLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="317.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
                </children>
             </VBox>
          </content>

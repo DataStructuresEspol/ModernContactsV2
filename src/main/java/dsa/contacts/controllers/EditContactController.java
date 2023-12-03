@@ -7,6 +7,7 @@ import dsa.contacts.model.Company;
 import dsa.contacts.model.Contact;
 import dsa.contacts.model.Email;
 import dsa.contacts.model.Info;
+import dsa.contacts.model.MyDate;
 import dsa.contacts.model.Person;
 import dsa.contacts.model.Phone;
 import dsa.contacts.model.SocialMedia;
@@ -78,13 +79,27 @@ public class EditContactController {
     private TextField infoOtro;
     
     private User user;
+    @FXML
+    private Label apellidoLabel;
+    @FXML
+    private ComboBox<String> dateTypeBox;
+    @FXML
+    private TextField dateField;
+    @FXML
+    private HBox groupTag;
+    @FXML
+    private ImageView checkViewTag;
     
+    private TextField entryTag;
+    
+    private Label selectedTagLabel;
     @FXML
     private void initialize() throws FileNotFoundException{
         user = Logger.loggedUser;
         editedContact = ContactInfoController.selectedContact;
         if (editedContact instanceof Company){
             apellidoField.setVisible(false);
+            apellidoLabel.setVisible(false);
         }
         else{
             apellidoField.setText(((Person)editedContact).getLastName());}
@@ -93,13 +108,16 @@ public class EditContactController {
         checkView.setVisible(false);
         infoOtro = new TextField();
         entryGroup = new TextField();
+        entryTag = new TextField();
         entryGroup.setStyle("-fx-border-width: 1");
         profilePic.setImage(Util.loadImage(App.IMAGEPATH+editedContact.getProfilePic()));
         initBox(phoneTypeBox, user.getPhoneTypes(), editedContact.getPhones(), phoneField);
         initBox(emailTypeBox, user.getEmailTypes(), editedContact.getEmails(), emailField);
         initBox(addressTypeBox, user.getAddressTypes(), editedContact.getAddresses(), addressField);
         initBox(socialMediaTypeBox, user.getSocialMediaTypes(), editedContact.getSocialMedias(), socialMediaField);
+        initBox(dateTypeBox, user.dateTypes(), editedContact.getDates(), dateField);
         initGroups();
+        initTags();
         initValues();
     }
     @FXML
@@ -113,6 +131,15 @@ public class EditContactController {
             lbl.setStyle("-fx-padding: 5");
             lbl.setOnMouseClicked(eh -> labelGroupClicked(lbl));
             groupBox.getChildren().add(lbl);
+        }
+    }
+    
+    private void initTags(){
+        for (String group : editedContact.getTags()){
+            Label lbl = new Label(group);
+            lbl.setStyle("-fx-padding: 5");
+            lbl.setOnMouseClicked(eh -> labelTagClicked(lbl));
+            groupTag.getChildren().add(lbl);
         }
     }
     private void initValues(){
@@ -132,6 +159,11 @@ public class EditContactController {
         if (!editedContact.getSocialMedias().isEmpty()){
             socialMediaTypeBox.setValue(editedContact.getSocialMedias().get(0).getType());
             socialMediaField.setText(editedContact.getSocialMedias().get(0).getInfo());
+        }
+        
+        if (!editedContact.getDates().isEmpty()){
+            dateTypeBox.setValue(editedContact.getDates().get(0).getType());
+            dateField.setText(editedContact.getDates().get(0).getInfo());
         }
     }
     private void initBox(ComboBox<String> box, Types items,List<? extends Info> info, TextField field){
@@ -399,5 +431,65 @@ public class EditContactController {
         App.save();
         App.retroceder();
     }
+
+    @FXML
+    private void addDate(MouseEvent event) {
+        //Agregar validaciones
+        String[] date = dateField.getText().split("/");
+        editedContact.getDates().add(new MyDate(Integer.parseInt(date[0]), Integer.parseInt(date[1]),
+                Integer.parseInt(date[2]), dateTypeBox.getSelectionModel().getSelectedItem()));
+        dateTypeBox.setValue("");
+        dateField.setText("");
+    }
+
+    @FXML
+    private void deleteDate(MouseEvent event) {
+            //Agregar validaciones
+        String[] date = dateField.getText().split("/");
+        editedContact.getDates().remove(new MyDate(Integer.parseInt(date[1]), Integer.parseInt(date[1]),
+                Integer.parseInt(date[1]), dateTypeBox.getSelectionModel().getSelectedItem()));
+        dateTypeBox.setValue("");
+        dateField.setText("");
+    }
+
+    @FXML
+    private void addTag(MouseEvent event) {
+        checkViewTag.setVisible(true);
+        checkViewTag.setOnMouseClicked(eh->checkTagClick());
+        groupTag.getChildren().add(entryTag);
+    }
+
+    @FXML
+    private void deleteTag(MouseEvent event) {
+        //Agregar validaciones
+        if (selectedTagLabel != null){
+            editedContact.getTags().remove(selectedTagLabel.getText());
+        groupTag.getChildren().remove(selectedTagLabel);
+        }
+    }
     
+        private void checkTagClick(){
+        //Agregar validaciones
+        editedContact.getTags().add(entryTag.getText());
+        Label lbl = new Label(entryTag.getText());
+        lbl.setStyle("-fx-padding: 5");
+        lbl.setOnMouseClicked(eh -> labelTagClicked(lbl));
+        groupTag.getChildren().add(lbl);
+        checkViewTag.setVisible(false);
+        checkViewTag.setOnMouseClicked(null);
+        entryTag.setText("");
+        groupTag.getChildren().remove(entryTag);
+    }
+    
+    private void labelTagClicked(Label lbl){
+        lbl.setStyle("-fx-border-color: black; -fx-border-width: 2");
+        if (selectedTagLabel != null){
+            for(Node n: groupTag.getChildren()){
+            Label label = (Label)n;
+            if (label.equals(selectedTagLabel)){label.setStyle(null);}
+        }
+        }
+        
+        selectedTagLabel = lbl;
+    }
 }

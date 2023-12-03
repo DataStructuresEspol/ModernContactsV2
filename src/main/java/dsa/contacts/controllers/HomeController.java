@@ -110,6 +110,7 @@ public class HomeController {
         if (!contacts.isEmpty()){
             contactPic.setImage(Util.loadImage(App.IMAGEPATH+contacts.get(0).getProfilePic()));
             contactName.setText(contacts.get(0).getName());
+            
             if (contacts.get(picView).isFavorite()){
                 favoriteIcon.setImage(Util.loadImage(App.ICONPATH+"favorite-solid.png"));
             }
