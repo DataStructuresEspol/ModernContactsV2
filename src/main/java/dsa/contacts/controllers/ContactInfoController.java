@@ -3,6 +3,7 @@ package dsa.contacts.controllers;
 import dsa.contacts.App;
 import dsa.contacts.model.Contact;
 import dsa.contacts.model.Info;
+import dsa.contacts.model.Person;
 import dsa.contacts.util.Logger;
 import dsa.contacts.util.Util;
 import java.io.FileNotFoundException;
@@ -35,14 +36,24 @@ public class ContactInfoController {
     private Label groupLabel;
     private int picView;
     @FXML
+    private Label dateLabel;
+    @FXML
+    private Label tagLabel;
+    @FXML
     private void initialize() throws FileNotFoundException{
-        nameLabel.setText(selectedContact.getName());
+        if (selectedContact instanceof Person){
+            Person p = (Person)selectedContact;
+        nameLabel.setText(p.getName()+" "+p.getLastName());
+        }
+        else{nameLabel.setText(selectedContact.getName());}
         profilePic.setImage(Util.loadImage(App.IMAGEPATH+selectedContact.getProfilePic()));
         groupLabel.setText(this.groupLabelString());
         phoneLabel.setText(infoString(selectedContact.getPhones()));
         emailLabel.setText(infoString(selectedContact.getEmails()));
         addressLabel.setText(infoString(selectedContact.getAddresses()));
         socialMediaLabel.setText(infoString(selectedContact.getSocialMedias()));
+        dateLabel.setText(infoString(selectedContact.getDates()));
+        tagLabel.setText(tagLabelString());
         if (selectedContact.isFavorite()){
             favoriteIcon.setImage(Util.loadImage(App.ICONPATH+"favorite-solid.png"));
         }
@@ -103,5 +114,13 @@ public class ContactInfoController {
             info += i.getType()+": "+i.getInfo()+"\n";
         }
         return info;
+    }
+    
+    private String tagLabelString(){
+        String groups="";
+        for (String s: selectedContact.getTags()){
+            groups += "\t"+s;
+        }
+        return groups;
     }
 }

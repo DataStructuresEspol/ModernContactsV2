@@ -43,6 +43,7 @@ public class LoginController implements Initializable {
         try {
             Logger.logIn(userNameField.getText(), passwordField.getText());
             App.setRoot("home");
+            
         } catch (ValidationException ex) {
             showAlert(ex);
         }

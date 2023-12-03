@@ -192,7 +192,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="contactPic" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#infoContact" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="contactPic" fitHeight="140.0" fitWidth="206.0" onMouseClicked="#infoContact" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="favoriteIcon" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#setFavorite" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@assets/icon/favorite.png" />
