@@ -87,9 +87,9 @@
                     </rowConstraints>
                      <children>
                         <Label text="Nombre" />
-                        <Label text="Pais" GridPane.rowIndex="1" />
+                        <Label text="Tipo" GridPane.rowIndex="1" />
                         <ChoiceBox fx:id="nameOrder" prefWidth="150.0" GridPane.columnIndex="1" />
-                        <ChoiceBox fx:id="countryOrder" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ChoiceBox fx:id="typeOrder" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                      <padding>
                         <Insets top="30.0" />

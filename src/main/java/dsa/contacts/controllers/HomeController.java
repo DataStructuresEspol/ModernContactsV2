@@ -52,7 +52,7 @@ public class HomeController {
     ChoiceBox<String> nameOrder;
 
     @FXML
-    ChoiceBox<String> countryOrder;
+    ChoiceBox<String> typeOrder;
     @FXML
     private ImageView addGroupIcon;
     @FXML
@@ -80,7 +80,7 @@ public class HomeController {
         filters = new ArrayList<>();
 
         nameOrder.getItems().addAll("Ascendente", "Descendente");
-        countryOrder.getItems().addAll("Ascendente", "Descendente");
+        typeOrder.getItems().addAll("Primero personas", "Primero empresas");
         // TODO: get groups, tags and attributes from database (data)
         groups.add("Familia");
         groups.add("Amigos");
@@ -112,6 +112,22 @@ public class HomeController {
                 throw new RuntimeException(e);
             }
         });
+        // Order by type
+        Filter typeFilter = new TypeOrder();
+        ((TypeOrder) typeFilter).setNoOrder();
+        filters.add(typeFilter);
+
+        typeOrder.setOnAction(order -> {
+            if (typeOrder.getValue().equals("Primero personas")) {
+                ((TypeOrder) typeFilter).setPersonFirst();
+            } else if (typeOrder.getValue().equals("Primero empresas")) {
+                ((TypeOrder) typeFilter).setCompanyFirst();
+            } else {
+                ((TypeOrder) typeFilter).setNoOrder();
+            }
+            updateFilters();
+        });
+
 
         // Filters
 
