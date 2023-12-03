@@ -90,7 +90,10 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        for (E element: c) {
+            add(element);
+        }
+        return true;
     }
 
     @Override
@@ -181,12 +184,12 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public ListIterator<E> listIterator() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new ArrayListIterator();
     }
 
     @Override
     public ListIterator<E> listIterator(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new ArrayListIterator(index);
     }
 
     @Override
@@ -238,11 +241,15 @@ public class ArrayList<E> implements List<E> {
         return elements;
     }
 
-    private class ArrayListIterator implements Iterator<E> {
+    private class ArrayListIterator implements ListIterator<E> {
         private int i;
 
         public ArrayListIterator() {
             i = 0;
+        }
+
+        public ArrayListIterator(int index) {
+            i = index;
         }
 
         @Override
@@ -257,5 +264,41 @@ public class ArrayList<E> implements List<E> {
             return element;
         }
 
+        @Override
+        public boolean hasPrevious() {
+            return i > 0;
+        }
+
+        @Override
+        public E previous() {
+            E element = arreglo[i];
+            i--;
+            return element;
+        }
+
+        @Override
+        public int nextIndex() {
+            return i + 1;
+        }
+
+        @Override
+        public int previousIndex() {
+            return i - 1;
+        }
+
+        @Override
+        public void remove() {
+            ArrayList.this.remove(i);
+        }
+
+        @Override
+        public void set(E e) {
+            ArrayList.this.set(i, e);
+        }
+
+        @Override
+        public void add(E e) {
+            ArrayList.this.add(i, e);
+        }
     }
 }
