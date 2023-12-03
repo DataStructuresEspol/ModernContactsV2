@@ -117,9 +117,7 @@ public class HomeController {
 
     private void restoreContacts() {
         contacts = new ArrayList<>();
-        System.out.println("asd");
         contacts.addAll(Logger.loggedUser.getContacts());
-        System.out.println("asd2");
     }
 
     @FXML

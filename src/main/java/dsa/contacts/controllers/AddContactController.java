@@ -53,7 +53,7 @@ public class AddContactController {
     @FXML
     private ImageView checkView;
     
-    private Contact newContact;
+    public static Contact newContact;
     
     private Label selectedGroupLabel;
     @FXML
@@ -96,6 +96,9 @@ public class AddContactController {
     private TextField entryTag;
     
     private Label selectedTagLabel;
+    
+    public static Stage nuevaVentana;
+    
     @FXML
     public void initialize(){
         user = Logger.loggedUser;
@@ -456,19 +459,15 @@ public class AddContactController {
     }
 
     @FXML
-    private void VerContactosRelacionados(MouseEvent event) throws IOException {
+    private void VerContactosRelacionados(ActionEvent event) throws IOException {
         // Crear la nueva ventana
-        Stage nuevaVentana = new Stage();
-        nuevaVentana.setTitle("Contactos relacionados");
+        nuevaVentana = new Stage();
+        nuevaVentana.setTitle("Seleccione Contactos Relacionados");
 
         // Crear contenido para la nueva ventana
-        StackPane contenido = new StackPane();
-        HBox box = new HBox();
-        
-        contenido.getChildren().add(box);
 
         // Crear la escena y agregar el contenido
-        Scene scene = new Scene(loadFXML("contactRelated"), 500, 500);
+        Scene scene = new Scene(loadFXML("contactRelated"), 780, 400);
         nuevaVentana.setScene(scene);
 
         // Mostrar la nueva ventana

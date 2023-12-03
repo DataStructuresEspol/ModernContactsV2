@@ -86,7 +86,7 @@
          <children>
             <ImageView fx:id="profilePic" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
-                  <Image url="@assets/images/google.png" />
+                  <Image url="@assets/images/default.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="64.0" fitWidth="64.0" onMouseClicked="#nextPic" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">

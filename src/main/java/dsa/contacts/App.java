@@ -36,7 +36,6 @@ public class App extends Application {
     }
 
     public static void setRoot(String fxml) throws IOException {
-        System.out.println(recorrido);
         recorrido.push(fxml);
         scene.setRoot(loadFXML(fxml));
     }
@@ -73,7 +72,6 @@ public class App extends Application {
     }
     
     public static void retroceder() throws IOException{
-        
         recorrido.pop();
         App.setRoot(recorrido.pop());
     }

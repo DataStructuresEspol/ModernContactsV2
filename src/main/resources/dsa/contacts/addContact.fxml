@@ -74,7 +74,7 @@
          <children>
             <ImageView fx:id="profilePic" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#selectPic" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
-                  <Image url="@assets/images/google.png" />
+                  <Image url="@assets/images/default.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="64.0" fitWidth="64.0" onMouseClicked="#prevPic" pickOnBounds="true" preserveRatio="true">
@@ -376,7 +376,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#saveContact" onMouseClicked="#VerContactosRelacionados" prefHeight="27.0" prefWidth="154.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 10;" text="Contactos Relacionados">
+                        <Button mnemonicParsing="false" onAction="#VerContactosRelacionados" prefHeight="27.0" prefWidth="154.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 10;" text="Contactos Relacionados">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
