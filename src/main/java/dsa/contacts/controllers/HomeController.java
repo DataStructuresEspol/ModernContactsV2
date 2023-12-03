@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -25,6 +26,9 @@ public class HomeController {
     private HashSet<String> groups;
     private HashSet<String> tags;
     private HashSet<String> attributes;
+
+    @FXML
+    private TextField searchbar;
 
     @FXML
     private HBox groupList;
@@ -141,6 +145,19 @@ public class HomeController {
                 filters.add(f);
             } else {
                 filters.remove(new isCompany());
+            }
+            updateFilters();
+        });
+
+        // filter by searchbar
+        Filter sbf = new SearchBar("");
+        filters.add(sbf);
+        searchbar.setOnKeyReleased(search -> {
+            for (Filter f: filters) {
+                if (f instanceof SearchBar) {
+                    f.setValue(searchbar.getText());
+                    break;
+                }
             }
             updateFilters();
         });

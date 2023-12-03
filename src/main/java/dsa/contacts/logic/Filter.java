@@ -29,4 +29,12 @@ public abstract class Filter {
     }
 
     public abstract ArrayList<Contact> filter(ArrayList<Contact> contacts);
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 }
