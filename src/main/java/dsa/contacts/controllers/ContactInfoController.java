@@ -1,6 +1,7 @@
 package dsa.contacts.controllers;
 
 import dsa.contacts.App;
+import static dsa.contacts.App.loadFXML;
 import dsa.contacts.model.Contact;
 import dsa.contacts.model.Info;
 import dsa.contacts.model.Person;
@@ -9,11 +10,14 @@ import dsa.contacts.util.Util;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class ContactInfoController {
 
@@ -40,6 +44,8 @@ public class ContactInfoController {
     private Label dateLabel;
     @FXML
     private Label tagLabel;
+    
+    private Stage nuevaVentana;
     @FXML
     private void initialize() throws FileNotFoundException{
         if (selectedContact instanceof Person){
@@ -123,5 +129,21 @@ public class ContactInfoController {
         for (Info i: listInfo){
             box.getChildren().add(new Label(i.getType()+": "+i.getInfo()));
         }
+    }
+
+    @FXML
+    private void VerContactosRelacionados(ActionEvent event) throws IOException {
+        // Crear la nueva ventana
+        nuevaVentana = new Stage();
+        nuevaVentana.setTitle("Seleccione Contactos Relacionados");
+
+        // Crear contenido para la nueva ventana
+
+        // Crear la escena y agregar el contenido
+        Scene scene = new Scene(loadFXML("contactRelatedInfo"), 780, 400);
+        nuevaVentana.setScene(scene);
+
+        // Mostrar la nueva ventana
+        nuevaVentana.show();
     }
 }

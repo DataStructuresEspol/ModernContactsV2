@@ -16,6 +16,7 @@ dsa\contacts\util\Logger.class
 dsa\contacts\ds\DoublyCircular.class
 dsa\contacts\model\Admin.class
 dsa\contacts\model\exceptions\ModelException.class
+dsa\contacts\controllers\ContactRelatedInfo.class
 dsa\contacts\model\Phone.class
 dsa\contacts\controllers\HomeController.class
 dsa\contacts\model\SocialMedia.class
@@ -37,4 +38,5 @@ dsa\contacts\ds\ArrayList$ArrayListIterator.class
 dsa\contacts\util\Util.class
 dsa\contacts\model\Types.class
 dsa\contacts\ds\DoublyCircular$CDLLIterator.class
+dsa\contacts\controllers\ContactRelatedEdit.class
 dsa\contacts\model\exceptions\PhoneException.class
