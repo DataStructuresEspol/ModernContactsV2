@@ -3,6 +3,7 @@ package dsa.contacts.controllers;
 import dsa.contacts.ds.ArrayList;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import dsa.contacts.App;
@@ -13,6 +14,8 @@ import dsa.contacts.util.Util;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -53,6 +56,9 @@ public class HomeController {
 
     @FXML
     ChoiceBox<String> typeOrder;
+
+    @FXML
+    ChoiceBox<String> attributeOrder;
     @FXML
     private ImageView addGroupIcon;
     @FXML
@@ -81,6 +87,7 @@ public class HomeController {
 
         nameOrder.getItems().addAll("Ascendente", "Descendente");
         typeOrder.getItems().addAll("Primero personas", "Primero empresas");
+        attributeOrder.getItems().addAll("Ascendente", "Descendente");
         // TODO: get groups, tags and attributes from database (data)
         groups.add("Familia");
         groups.add("Amigos");
@@ -112,6 +119,28 @@ public class HomeController {
                 throw new RuntimeException(e);
             }
         });
+        // Order by amount of attributes
+        attributeOrder.setOnAction(order -> {
+            if (attributeOrder.getValue().equals("Ascendente")) {
+                contacts.sort((c1, c2) -> {
+                    int c1AttributesSize = getAttributesSize(c1.getFields());
+                    int c2AttributesSize = getAttributesSize(c2.getFields());
+                    return c2AttributesSize - c1AttributesSize;
+                });
+            } else {
+                contacts.sort((c1, c2) -> {
+                    int c1AttributesSize = getAttributesSize(c1.getFields());
+                    int c2AttributesSize = getAttributesSize(c2.getFields());
+                    return c1AttributesSize - c2AttributesSize;
+                });
+            }
+            try {
+                updateView();
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         // Order by type
         Filter typeFilter = new TypeOrder();
         ((TypeOrder) typeFilter).setNoOrder();
@@ -357,4 +386,19 @@ public class HomeController {
         }
     }
 
+    private int getAttributesSize(HashMap<String, Object> attributes) {
+        int attributesSize = 0;
+        for (String attribute: attributes.keySet()) {
+            if (attributes.get(attribute) instanceof String) {
+                if (!attributes.get(attribute).equals("")) {
+                    attributesSize++;
+                }
+            } else if (attributes.get(attribute) instanceof List) {
+                if (!((List<?>) attributes.get(attribute)).isEmpty()) {
+                    attributesSize++;
+                }
+            }
+        }
+        return attributesSize;
+    }
 }

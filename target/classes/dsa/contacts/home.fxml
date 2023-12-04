@@ -84,12 +84,15 @@
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label text="Nombre" />
                         <Label text="Tipo" GridPane.rowIndex="1" />
                         <ChoiceBox fx:id="nameOrder" prefWidth="150.0" GridPane.columnIndex="1" />
                         <ChoiceBox fx:id="typeOrder" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="# Atributos" GridPane.rowIndex="2" />
+                        <ChoiceBox fx:id="attributeOrder" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                      <padding>
                         <Insets top="30.0" />
