@@ -505,6 +505,7 @@ public class EditContactController {
         // Crear contenido para la nueva ventana
 
         // Crear la escena y agregar el contenido
+        
         Scene scene = new Scene(loadFXML("contactRelatedEdit"), 780, 400);
         nuevaVentana.setScene(scene);
 

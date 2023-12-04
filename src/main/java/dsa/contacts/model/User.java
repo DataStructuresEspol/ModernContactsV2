@@ -1,8 +1,10 @@
 
 package dsa.contacts.model;
 
+import dsa.contacts.ds.ArrayList;
+import dsa.contacts.ds.DoublyCircular;
 import java.io.Serializable;
-import java.util.ArrayList;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,7 +13,7 @@ public class User implements Serializable{
     private String userName;
     private String password;
     private String pic;
-    private LinkedList<Contact> contacts;
+    private DoublyCircular<Contact> contacts;
     private List<String> groups;
     private Types phoneTypes;
     private Types addressTypes;
@@ -22,7 +24,7 @@ public class User implements Serializable{
     public User(String userName, String password){
         this.userName = userName;
         this.password = password;
-        contacts = new LinkedList<Contact>();
+        contacts = new DoublyCircular<Contact>();
         groups = new ArrayList<String>();
         phoneTypes = new Types();
         emailTypes = new Types();
@@ -37,7 +39,7 @@ public class User implements Serializable{
     
     public List<String> getGroups(){return groups;}
     
-    public LinkedList<Contact> getContacts(){return contacts;}
+    public DoublyCircular<Contact> getContacts(){return contacts;}
     
     public String getPic(){return pic;}
     
@@ -51,7 +53,7 @@ public class User implements Serializable{
     
     public Types dateTypes(){return dateTypes;}
     
-    public boolean isAdmin(){return true;}
+    public boolean isAdmin(){return false;}
     
     public void setUserName(String userName){this.userName = userName;}
     

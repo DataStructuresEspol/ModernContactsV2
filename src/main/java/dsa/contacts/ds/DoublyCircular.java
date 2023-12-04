@@ -1,17 +1,18 @@
 package dsa.contacts.ds;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class DoublyCircular<E> implements List<E>, Iterable<E> {
+public class DoublyCircular<E> implements List<E>, Iterable<E>, Serializable {
     Node<E> head;
     Node<E> tail;
     int n;
 
-    private class Node<E> {
+    private class Node<E> implements Serializable {
         E content;
         Node<E> next;
         Node<E> prev;
@@ -37,7 +38,7 @@ public class DoublyCircular<E> implements List<E>, Iterable<E> {
         return new ReverseIterator();
     }
 
-    private class CDLLIterator implements Iterator<E> {
+    private class CDLLIterator implements Iterator<E>, Serializable {
         int cursor = 0;
         Node<E> ref = head;
 
@@ -119,8 +120,11 @@ public class DoublyCircular<E> implements List<E>, Iterable<E> {
 
     @Override
     public boolean remove(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return true;
     }
+    
+
+    
 
     @Override
     public boolean containsAll(Collection<?> c) {
