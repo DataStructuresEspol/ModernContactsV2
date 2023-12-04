@@ -120,11 +120,38 @@ public class DoublyCircular<E> implements List<E>, Iterable<E>, Serializable {
 
     @Override
     public boolean remove(Object o) {
-        return true;
-    }
-    
+        Node<E> toBeRemoved = null;
 
-    
+        if (head.content.equals(o)) { // remove head
+            toBeRemoved = head;
+            head = head.next;
+            head.prev = tail;
+            tail.next = head;
+        } else if (tail.content.equals(o)) { // remove tail
+            toBeRemoved = tail;
+            tail = tail.prev;
+            tail.next = head;
+            head.prev = tail;
+        } else { // remove between
+            Node<E> ref = head;
+            while (ref.next != head) {
+                if (ref.content.equals(o)) {
+                    toBeRemoved = ref;
+                    break;
+                }
+                ref = ref.next;
+            }
+            if (toBeRemoved != null) {
+                toBeRemoved.next.prev = toBeRemoved.prev;
+                toBeRemoved.prev.next = toBeRemoved.next;
+            }
+        }
+        if (toBeRemoved != null) {
+            n--;
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public boolean containsAll(Collection<?> c) {
