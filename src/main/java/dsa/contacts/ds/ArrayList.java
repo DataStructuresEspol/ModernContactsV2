@@ -1,12 +1,13 @@
 package dsa.contacts.ds;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class ArrayList<E> implements List<E> {
+public class ArrayList<E> implements List<E>, Serializable{
     private E[] arreglo;
     private int n, capacidad;
 
@@ -178,7 +179,12 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public int indexOf(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int i = 0;
+        while (i < n && !arreglo[i].equals(o)) {
+            i++;
+        }
+        if (i == n) return -1;
+        return i;
     }
 
     @Override
@@ -245,7 +251,7 @@ public class ArrayList<E> implements List<E> {
         return elements;
     }
 
-    private class ArrayListIterator implements ListIterator<E> {
+    private class ArrayListIterator implements ListIterator<E>, Serializable {
         private int i;
 
         public ArrayListIterator() {

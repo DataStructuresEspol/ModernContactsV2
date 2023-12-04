@@ -1,9 +1,11 @@
 package dsa.contacts.model;
 
+import dsa.contacts.ds.ArrayList;
+import dsa.contacts.ds.DoublyCircular;
 import java.io.Serializable;
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.LinkedList;
+
 import java.util.List;
 
 public class Contact implements Serializable{
@@ -15,7 +17,7 @@ public class Contact implements Serializable{
     private List<SocialMedia> socialMedias;
     private ArrayList<String> pics;
     private List<MyDate> dates;
-    private LinkedList<Contact> relatedContacts;
+    private DoublyCircular<Contact> relatedContacts;
     private List<String> joinedGroups;
     private List<String> tags;
     private boolean favorite;
@@ -42,7 +44,7 @@ public class Contact implements Serializable{
         dates = new ArrayList<>();
         joinedGroups = new ArrayList<>();
         tags = new ArrayList<>();
-        relatedContacts = new LinkedList<>();
+        relatedContacts = new DoublyCircular<>();
     }
     
     public String getName(){return name;}
@@ -61,7 +63,7 @@ public class Contact implements Serializable{
     
     public List<MyDate> getDates(){return dates;}
     
-    public LinkedList<Contact> getRelatedContacts(){return relatedContacts;}
+    public DoublyCircular<Contact> getRelatedContacts(){return relatedContacts;}
     
     public List<String> getJoinedGroups(){return joinedGroups;}
     
@@ -80,6 +82,11 @@ public class Contact implements Serializable{
     
     public void setFavorite(){favorite = !favorite;}
     
+    @Override
+    public boolean equals(Object o){
+        Contact c = (Contact)o;
+        return this.name.equals(c.name) && this.profilePic.equals(c.profilePic);
+    }
     public HashMap<String, Object> getFields() {
         HashMap<String, Object> fields = new HashMap<>();
         fields.put("name", name);

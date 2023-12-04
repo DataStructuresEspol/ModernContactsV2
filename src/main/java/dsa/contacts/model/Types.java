@@ -1,8 +1,9 @@
 
 package dsa.contacts.model;
 
+import dsa.contacts.ds.ArrayList;
 import java.io.Serializable;
-import java.util.ArrayList;
+
 
 public class Types implements Serializable{
     private ArrayList<String> types;

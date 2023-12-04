@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import dsa.contacts.App;
+import static dsa.contacts.App.loadFXML;
 import dsa.contacts.logic.*;
 import dsa.contacts.model.Contact;
 import dsa.contacts.util.Logger;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -24,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class HomeController {
     private HashSet<String> groups;
@@ -75,11 +78,16 @@ public class HomeController {
     private Label saludo;
     @FXML
     private ImageView favoriteIcon;
+    
+    public static Stage settings;
 
     // Filter
     private ArrayList<Filter> filters;
     @FXML
+    private ImageView adminView;
+    @FXML
     private void initialize() throws FileNotFoundException {
+        if (!Logger.loggedUser.isAdmin()){adminView.setVisible(false);}
         groups = new HashSet<>();
         tags = new HashSet<>();
         attributes = new HashSet<>();
@@ -230,7 +238,16 @@ public class HomeController {
     }
 
     @FXML
-    private void settingsMenu() {
+    private void settingsMenu() throws IOException {
+        // Crear la nueva ventana
+        settings = new Stage();
+        settings.setTitle("Configuraciones");
+        // Crear la escena y agregar el contenido
+        Scene scene = new Scene(loadFXML("settings"), 780, 600);
+        settings.setScene(scene);
+
+        // Mostrar la nueva ventana
+        settings.show();
 
     }
 
@@ -386,6 +403,10 @@ public class HomeController {
         }
     }
 
+    @FXML
+    private void adminUsers(MouseEvent event) throws IOException {
+        App.setRoot("adminUsers");
+    }
     private int getAttributesSize(HashMap<String, Object> attributes) {
         int attributesSize = 0;
         for (String attribute: attributes.keySet()) {
