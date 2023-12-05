@@ -4,8 +4,6 @@ package dsa.contacts.model;
 import dsa.contacts.ds.ArrayList;
 import dsa.contacts.ds.DoublyCircular;
 import java.io.Serializable;
-
-import java.util.LinkedList;
 import java.util.List;
 
 
