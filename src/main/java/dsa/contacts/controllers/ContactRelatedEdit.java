@@ -2,20 +2,18 @@
 package dsa.contacts.controllers;
 
 import dsa.contacts.App;
-import dsa.contacts.ds.ArrayList;
+import dsa.contacts.model.Contact;
 import dsa.contacts.model.User;
 import dsa.contacts.util.Logger;
 import dsa.contacts.util.Util;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-
-public class ContactRelated {
+public class ContactRelatedEdit {
 
     @FXML
     private ImageView profilePic;
@@ -30,6 +28,8 @@ public class ContactRelated {
            profilePic.setImage(Util.loadImage(App.IMAGEPATH+user.getContacts().get(0).getProfilePic()));
            nameLabel.setText(user.getContacts().get(0).getName());
         }
+        
+        
     }
 
 
@@ -50,16 +50,15 @@ public class ContactRelated {
 
     @FXML
     private void seleccionar(ActionEvent event){
-        AddContactController.newContact.getRelatedContacts().add(
+        EditContactController.editedContact.getRelatedContacts().add(
         user.getContacts().get(picView));
-        AddContactController.nuevaVentana.close();
+        EditContactController.nuevaVentana.close();
     }
 
     @FXML
     private void quitar(ActionEvent event) {
-        AddContactController.newContact.getRelatedContacts().remove(
+        EditContactController.editedContact.getRelatedContacts().remove(
         user.getContacts().get(picView));
-        AddContactController.nuevaVentana.close();
+        EditContactController.nuevaVentana.close();
     }
-    
 }

@@ -388,10 +388,20 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <Button mnemonicParsing="false" onAction="#saveContact" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 10;" text="Guardar">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
+                  <HBox alignment="TOP_CENTER" prefHeight="27.0" prefWidth="265.0" spacing="10.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#saveContact" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 10;" text="Guardar">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#VerContactosRelacionados" prefHeight="27.0" prefWidth="154.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 10;" text="Contactos Relacionados">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </content>

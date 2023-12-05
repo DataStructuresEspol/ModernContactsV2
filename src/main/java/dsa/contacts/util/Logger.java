@@ -2,6 +2,7 @@
 package dsa.contacts.util;
 
 import dsa.contacts.App;
+import dsa.contacts.model.Admin;
 import dsa.contacts.model.User;
 import dsa.contacts.model.exceptions.AdreadyCreatedUser;
 import dsa.contacts.model.exceptions.InvalidPasswordException;
@@ -11,6 +12,7 @@ import java.io.IOException;
 
 public class Logger {
     public static User loggedUser;
+    public static Admin loggedAdmin;
     
     public static boolean validatePassword(User u, String password) throws InvalidPasswordException{
         if (password.isBlank()){throw new InvalidPasswordException("NO HAS LLENADO LA CASILLA");}
@@ -30,6 +32,9 @@ public class Logger {
         User u = findUser(new User(userName, password));
         if (validatePassword(u, password)){loggedUser = u;}
         else{throw new InvalidPasswordException("CONTRASEÑA INCORRECTA");}
+        if(u.isAdmin()){
+            loggedUser = (Admin)u;
+            loggedAdmin = (Admin)u;}
     }
     
     public static void registUser(String userName, String password) throws IOException, UserNotFoundException, ValidationException{

@@ -1,5 +1,7 @@
 package dsa.contacts;
 
+import dsa.contacts.ds.ArrayList;
+import dsa.contacts.model.Admin;
 import dsa.contacts.util.Util;
 import dsa.contacts.model.User;
 import dsa.contacts.model.exceptions.ValidationException;
@@ -11,7 +13,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.Stack;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -26,7 +28,7 @@ public class App extends Application {
     public static Stack<String> recorrido = new Stack();
 
     @Override
-    public void start(Stage stage) throws IOException, ClassNotFoundException {
+    public void start(Stage stage) throws IOException, ClassNotFoundException {        
         loadSer();
         String fxml = "login";
         recorrido.push(fxml);

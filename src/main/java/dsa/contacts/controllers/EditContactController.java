@@ -2,6 +2,7 @@
 package dsa.contacts.controllers;
 
 import dsa.contacts.App;
+import static dsa.contacts.App.loadFXML;
 import dsa.contacts.model.Address;
 import dsa.contacts.model.Company;
 import dsa.contacts.model.Contact;
@@ -68,7 +69,7 @@ public class EditContactController {
     @FXML
     private TextField socialMediaField;
     
-    private Contact editedContact;
+    public static Contact editedContact;
     
     private int picView;
     
@@ -93,6 +94,8 @@ public class EditContactController {
     private TextField entryTag;
     
     private Label selectedTagLabel;
+    
+    public static Stage nuevaVentana;
     @FXML
     private void initialize() throws FileNotFoundException{
         user = Logger.loggedUser;
@@ -491,5 +494,22 @@ public class EditContactController {
         }
         
         selectedTagLabel = lbl;
+    }
+
+    @FXML
+    private void VerContactosRelacionados(ActionEvent event) throws IOException {
+        // Crear la nueva ventana
+        nuevaVentana = new Stage();
+        nuevaVentana.setTitle("Seleccione Contactos Relacionados");
+
+        // Crear contenido para la nueva ventana
+
+        // Crear la escena y agregar el contenido
+        
+        Scene scene = new Scene(loadFXML("contactRelatedEdit"), 780, 400);
+        nuevaVentana.setScene(scene);
+
+        // Mostrar la nueva ventana
+        nuevaVentana.show();
     }
 }
