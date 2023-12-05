@@ -25,6 +25,14 @@
         </rowConstraints>
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="192.0" spacing="30.0" GridPane.columnIndex="2" />
+            <ImageView fitHeight="50.0" fitWidth="50.0" onMouseClicked="#regresar" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/icon/back.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
          </children>
          <VBox.margin>
             <Insets top="20.0" />
@@ -49,7 +57,7 @@
           <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fx:id="profilePic" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+            <ImageView fx:id="profilePic" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#enterUser" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
                   <Image url="@assets/images/default.png" />
                </image>
